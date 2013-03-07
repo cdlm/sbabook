@@ -1,0 +1,150 @@
+\documentclass[
+    10pt,
+    twoside,
+    smallroyalvopaper,
+    % showtrims
+]{memoir}
+% \stockaiv % uncomment for printing with trim lines on printer paper
+\raggedbottom
+\setulmarginsandblock{.75in}{1in}{*}
+\checkandfixthelayout
+
+\usepackage{fontspec}
+\setmainfont{Gentium Book Basic}
+\setsansfont[Scale=MatchLowercase]{Open Sans}
+\setmonofont[Scale=MatchLowercase]{Inconsolata}
+
+% XeLaTeX support not there yet…
+% http://tex.stackexchange.com/questions/2986/margin-kerning-in-xelatex-for-texlive-2010-how-to-enable
+% \usepackage{microtype}
+
+\usepackage{ragged2e}
+\usepackage{varwidth}
+\RaggedRight
+% \setmpjustification{\RaggedLeft}{\Raggedright} % this is for margin floats
+\sideparmargin{outer}
+\renewcommand\sideparfont{\footnotesize\sffamily}
+\renewcommand\sideparform{\ifmemtortm\RaggedRight\else\RaggedLeft\fi}
+
+% TODO should really be using \makeheadstyles (p.112 of memoir manual)
+\chapterstyle{veelo}
+\noindentafterchapter
+
+\makeatletter
+\renewcommand\chapterheadstart{}
+\renewcommand\printchaptername{\chapnamefont\MakeUppercase\@chapapp}
+\renewcommand\chapnamefont{\LARGE\sffamily\bfseries\addfontfeature{LetterSpace=20}\flushright}
+\renewcommand\chapnumfont{\HUGE\sffamily\bfseries}
+\renewcommand\chaptitlefont{\HUGE\sffamily\mdseries\flushright}
+\renewcommand\precisfont{\normalfont\sffamily}
+\newenvironment{balanced}[1]{%
+    \CenteringLeftskip    0pt plus 6em%
+    \CenteringRightskip   0pt plus 6em%
+    \RaggedLeftLeftskip   0pt plus 12em%
+    \RaggedRightRightskip 0pt plus 12em%
+    \begin{varwidth}{#1}%
+    }{\end{varwidth}}
+\setlength{\prechapterprecisshift}{-2.5\baselineskip}
+\renewcommand\prechapterprecis{%
+    \vspace*{\prechapterprecisshift}%
+    \begin{flushright}\begin{balanced}{\linewidth}%
+        \RaggedLeft\precisfont}
+\renewcommand\postchapterprecis{%
+    \end{balanced}\end{flushright}}
+\renewcommand\precistocfont{\normalfont\sffamily\itshape\small}
+%%% fix indentation of 1st paragraph after \chapterprecis
+\addtoiargdef\chapterprecis{%
+  \ignorespacesafterend\par\m@mindentafterchapter
+  \everypar{{\setbox\z@\lastbox}\everypar{}}}
+%%% end fix
+\setsecheadstyle{\LARGE\sffamily\bfseries}
+\setsubsecheadstyle{\Large\sffamily\bfseries}
+\setsubsubsecheadstyle{\Large\sffamily}
+\setsecnumformat{\Large\mdseries\llap{\csname the#1\endcsname\quad}}
+\setparaheadstyle{\sffamily\bfseries}
+
+\makepagestyle{pierbook-headings}
+\def\headfootfont{\small\sffamily}
+\makeevenhead{pierbook-headings}{}{}{\ifonlyfloats{}{\headfootfont\leftmark}}
+\makeoddhead {pierbook-headings}{\ifonlyfloats{}{\headfootfont\rightmark}}{}{}
+\makeevenfoot{pierbook-headings}{\headfootfont\bfseries\thepage}{}{}
+\makeoddfoot {pierbook-headings}{}{}{\headfootfont\bfseries\thepage}
+\makepsmarks{pierbook-headings}{\nouppercaseheads
+    \createmark{chapter}{left}{nonumber}{}{}
+    \createmark{section}{right}{shownumber}{}{\quad}}
+\makepagestyle{pierbook-plain}
+\makeevenfoot{pierbook-plain}{\headfootfont\bfseries\thepage}{}{}
+\makeoddfoot {pierbook-plain}{}{}{\headfootfont\bfseries\thepage}
+\mergepagefloatstyle{pierbook}{pierbook-headings}{empty}
+
+\pagestyle{pierbook}
+\aliaspagestyle{book}{empty}
+\aliaspagestyle{part}{empty}
+\aliaspagestyle{chapter}{pierbook-plain}
+
+\setlength{\parindent}{1.5em}
+
+\setsecnumdepth{subsection}
+
+\usepackage{polyglossia}
+\setmainlanguage{english}
+
+\usepackage{lipsum}
+\setotherlanguage{latin}
+
+\title{Titre du livre}
+\author{Auteur
+    \and Collaborateur
+    \and Autre
+    \andnext Secrétaire
+\and Trésorier}
+
+\begin{document}
+\begin{titlingpage}
+    \maketitle
+\end{titlingpage}
+
+\frontmatter
+
+\tableofcontents
+
+
+\mainmatter
+
+
+\chapter{A small chapter in Latin}
+
+\chapterprecis{Demonstrating simple paragraphs and section headings, as well as a rather long precis.}
+
+\sidepar{Testing the margin note layout, hopefully this much text is enough to see what it looks like.}%
+\textlatin{\lipsum[1-2]}
+
+
+\section{More placeholder text}
+
+\textlatin{\lipsum[3]}
+
+\subsection{And even more}
+
+\textlatin{\lipsum[4]}
+
+\subsubsection{And still more}
+
+\sidepar{Testing the margin note layout, hopefully this much text is enough to see what it looks like.}%
+\textlatin{\lipsum[5-6]}
+
+\paragraph{And still more}
+
+\textlatin{\lipsum[7-9]}
+
+
+%%% TODO fontes
+% \book{Livre second}
+% \part{Épisode premier}
+
+\chapter{Another empty chapter}
+\chapterprecis{Just to see another chapter heading.}
+
+\backmatter
+
+\end{document}

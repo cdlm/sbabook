@@ -4,10 +4,20 @@
     smallroyalvopaper,
     % showtrims
 ]{memoir}
-% \stockaiv % uncomment for printing with trim lines on printer paper
-\raggedbottom
-\setulmarginsandblock{.75in}{1in}{*}
+\usepackage{calc}
+\settypeoutlayoutunit{mm}
+\setlrmarginsandblock{1in}{*}{*}
+\setulmarginsandblock{.75in}{.75in}{*}
+\ifshowtrims
+    \stockaiv
+    \settrims
+        {(\stockheight-\paperheight)/2}
+        {(\stockwidth-\paperwidth)/2}
+    \trimFrame
+    \def\trimmarkscolor{\color{cyan}}
+\else\fi
 \checkandfixthelayout
+\raggedbottom
 
 \usepackage{fontspec}
 \setmainfont{Gentium Book Basic}
@@ -114,7 +124,7 @@
   basicstyle=\small\ttfamily}
 \lstdefinelanguage{http}{keywords={HTTP}}
 \lstnewenvironment{script}[2][defaultlabel]{%
-\renewcommand{\lstlistingname}{Script}%
+    \renewcommand{\lstlistingname}{Script}%
 	\lstset{
 		frame=tb,
 		framerule=.5pt, % too thin

@@ -53,9 +53,9 @@
     \end{balanced}\end{flushright}}
 \renewcommand\precistocfont{\normalfont\sffamily\itshape\small}
 %%% fix indentation of 1st paragraph after \chapterprecis
-\addtoiargdef\chapterprecis{%
-  \ignorespacesafterend\par\m@mindentafterchapter
-  \everypar{{\setbox\z@\lastbox}\everypar{}}}
+%% cf https://groups.google.com/forum/#!msg/comp.text.tex/yj4ZoVlbSKE/5hJXO-2jG5EJ
+\addtoiargdef\chapterprecis{}{%
+  \par\@afterheading\m@mindentafterchapter}
 %%% end fix
 \setsecheadstyle{\LARGE\sffamily\bfseries}
 \setsubsecheadstyle{\Large\sffamily\bfseries}

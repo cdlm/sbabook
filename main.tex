@@ -97,14 +97,37 @@
 \renewcommand\sidecapfloatwidth{.5\linewidth}% ahould adjust \sidecapwidth accordingly
 \setlength{\parindent}{1.5em}
 
+\usepackage{xcolor}
+\definecolor{shadecolor}{gray}{0.9}
+
 \setsecnumdepth{subsection}
 \settocdepth{subsection}
 
 \usepackage{polyglossia}
 \setmainlanguage{english}
 
+\usepackage{listings}
+\usepackage{lstsmalltalk}
+\lstset{
+  inputencoding=utf8,
+  columns=fullflexible,
+  basicstyle=\small\ttfamily}
+\lstdefinelanguage{http}{keywords={HTTP}}
+\lstnewenvironment{script}[2][defaultlabel]{%
+\renewcommand{\lstlistingname}{Script}%
+	\lstset{
+		frame=tb,
+		framerule=.5pt, % too thin
+		mathescape=false,
+		name={Script},
+		caption={\emph{#2}},
+		label={scr:#1}
+	}
+}{}
+
 \usepackage{lipsum}
 \setotherlanguage{latin}
+
 
 \title{Titre du livre}
 \author{Auteur
@@ -121,8 +144,8 @@
 \frontmatter
 
 \tableofcontents
-
 \listoffigures
+\listoftables
 
 \mainmatter
 
@@ -160,10 +183,61 @@
 % \book{Livre second}
 % \part{Épisode premier}
 
-\chapter{Another empty chapter}
-\chapterprecis{Just to see another chapter heading.}
+\chapter{Another empty chapter, except for the figures, tables, and really long title}
+\chapterprecis{Long titles happen, and the heading needs to support it.}
 
-\begin{figure}\centering
+\begin{leftbar}
+    \lipsum[2]
+\end{leftbar}
+
+\begin{script}[fortytwo]{A small method}
+SomeClass>>method: arg with: arg
+    ^ 42
+\end{script}
+
+Like any Smalltalk object, you can inspect or explore the ZnResponse object. You might be wondering how this response was actually transferred over the network. That is easy with Zn, as the key HTTP objects all implement \#writeOn: for this purpose.
+
+\begin{script}{Making a connection}
+| response |
+response := (ZnClient new)
+  url: 'http://zn.stfx.eu/zn/small.html';
+  get;
+  response.
+response writeOn: Transcript.
+Transcript flush.
+\end{script}
+
+If you have the Transcript open, you should see something like the following:
+
+\begin{script}{The server's answer}
+HTTP/1.1 200 OK
+Date: Tue, 08 May 2012 19:00:25 GMT
+Modification-Date: Thu, 10 Feb 2011 08:32:30 GMT
+Content-Length: 113
+Server: Zinc HTTP Components 1.0
+Vary: Accept-Encoding
+Content-Type: text/html;charset=utf-8
+
+<html>
+<head><title>Small</title></head>
+<body><h1>Small</h1><p>This is a small HTML document</p></body>
+</html>
+\end{script}
+
+\begin{table}[p]
+    \begin{sidecaption}{A stupid table}
+        \begin{tabular}{ccc}
+            \toprule
+            foo & bar & baz \\
+            \midrule
+            coffee & 42 & 1.25\,€ \\
+            tea & 1 & 2,00\,€ \\
+            \bottomrule
+        \end{tabular}
+    \end{sidecaption}
+\end{table}
+
+\begin{figure}[p]
     \begin{framed}
         A FRAMED\\
         FIGURE
@@ -171,13 +245,13 @@
     \caption{This is not a figure}
 \end{figure}
 
-\begin{figure}\centering
+\begin{figure}[p]
     \begin{sidecaption}{A little caption on the side}
-        \begin{framed}
+        \begin{shaded}
             ANOTHER\\
             FRAMED\\
             FIGURE
-        \end{framed}
+        \end{shaded}
     \end{sidecaption}
 \end{figure}
 

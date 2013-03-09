@@ -7,17 +7,17 @@ This is a set of layout, typography, and markup definitions for LaTeX books base
 
 The preamble is limited to the minimum:
 
-    \documentclass{sbabook}
-    \setmainlanguage{english} % this is polyglossia, not babel
-    \begin{document}
+```latex
+\documentclass{sbabook}
+\setmainlanguage{english} % this is polyglossia, not babel
+\begin{document}
 
-    ...and off you go!
+...and off you go!
 
-    \end{document}
+\end{document}
+```
 
-The class requires XeLaTeX to load nice fonts:
-
-    xelatex document
+The class requires XeLaTeX to load nice fonts; just use `xelatex` instead of `pdflatex` to compile.
 
 
 ## Showcase

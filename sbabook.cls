@@ -13,6 +13,10 @@
 
 \RequirePackage{iftex}\RequireXeTeX
 
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\renewcommand{\trimmarkscolor}{\color{cyan}}
+
 %%%
 %%% Page layout
 %%%
@@ -47,7 +51,6 @@
 
 \RequirePackage{ragged2e}
 \RaggedRight
-
 \RequirePackage{varwidth}
 \newenvironment{balanced}[1]{%
     \CenteringLeftskip    0pt plus 6em%
@@ -163,14 +166,10 @@
 \captiontitlefont{\sffamily}
 \renewcommand\sidecapfloatwidth{.5\linewidth}% ahould adjust \sidecapwidth accordingly
 
-
 %%%
 %%% Graphics
 %%%
-\RequirePackage{graphicx}
-\RequirePackage{xcolor}
 \RequirePackage{tikz}
-\renewcommand{\trimmarkscolor}{\color{cyan}}
 \definecolor{shadecolor}{gray}{0.9} % FIXME really needed?
 
 %%%

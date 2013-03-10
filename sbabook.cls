@@ -38,8 +38,8 @@
 %%% Fonts & paragraph typography
 %%%
 \RequirePackage{fontspec}
-\setmainfont{Gentium Book Basic}
-\setsansfont[Scale=MatchLowercase]{Open Sans}
+\setmainfont[Numbers=OldStyle]{Gentium Book Basic}
+\setsansfont[Scale=MatchLowercase,Numbers=OldStyle]{Open Sans}
 \setmonofont[Scale=MatchLowercase]{Inconsolata}
 
 \noindentafterchapter
@@ -94,7 +94,7 @@
         \resizebox{!}{\chapnumheight}{\chapnumfont \,\thechapter\,}%
         \makebox[-\midchapskip][l]{%
             \rule{1.5\chapbarwidth}{\chapnumheight}%
-    }}}
+        }}}
 \chapterstyle{sba}
 
 %% chapter precis
@@ -119,11 +119,12 @@
 \setparaheadstyle     {\sffamily\bfseries}
 \setsubparaheadstyle  {\sffamily}
 \setsecnumformat{%
-    \Large\mdseries
-    \llap{\csname the#1\endcsname\quad}}
+    \llap{\mdseries
+        \csname the#1\endcsname
+        \quad}}
 
-\setsecnumdepth{subsection}
-\settocdepth{subsection}
+\setsecnumdepth{section}
+\settocdepth{section}
 
 %%%
 %%% Table of contents etc
@@ -131,14 +132,21 @@
 \renewcommand\cftchapterfont{\sffamily\bfseries}
 \let\cftchapterpagefont\cftchapterfont
 \renewcommand\precistocfont{\normalfont\sffamily\itshape\small}
+\renewcommand\precistocformat{\noindent\narrowragged}
 % TODO balance precis in TOC
 \renewcommand\cftsectionfont{\sffamily}
 \let\cftsectionpagefont\cftsectionfont
 \renewcommand\cftsubsectionfont{\sffamily\itshape}
 \let\cftsubsectionpagefont\cftsectionfont
-\cftsetindents{chapter}{0pt}{2em}
-\cftsetindents{section}{0pt}{\cftchapternumwidth}
-\cftsetindents{subsection}{\cftsectionnumwidth}{3em}
+\cftsetindents{chapter}{0pt}{0em}
+\renewcommand{\cftchapterpresnum}{\hspace{-4em}\hfill}
+\renewcommand{\cftchapteraftersnum}{\quad}
+\cftsetindents{section}{0pt}{0em}
+\renewcommand{\cftsectionpresnum}{\hspace{-4em}\hfill}
+\renewcommand{\cftsectionaftersnum}{\quad}
+\cftsetindents{subsection}{0pt}{3em}
+
+% merged list of figures/tables: \newlistofb ?
 
 %%%
 %%% Page styles & folios

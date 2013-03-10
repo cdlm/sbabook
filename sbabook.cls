@@ -60,6 +60,12 @@
     \begin{varwidth}{#1}%
 }{\end{varwidth}}
 
+%% margin content
+\sideparmargin{outer}
+\renewcommand\sideparfont{\footnotesize\sffamily}
+\renewcommand\sideparform{\ifmemtortm\RaggedRight\else\RaggedLeft\fi}
+% \setmpjustification{\RaggedLeft}{\Raggedright} % this is for margin floats
+
 %%%
 %%% Sectioning
 %%%

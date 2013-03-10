@@ -145,6 +145,7 @@
 \renewcommand{\cftsectionpresnum}{\hspace{-4em}\hfill}
 \renewcommand{\cftsectionaftersnum}{\quad}
 \cftsetindents{subsection}{0pt}{3em}
+\setrmarg{3.55em plus 1fil}% help avoid hyphenation
 
 % merged list of figures/tables: \newlistofb ?
 
@@ -192,6 +193,7 @@
 \RequirePackage{listings}
 \RequirePackage{lstsmalltalk}
 
+\renewcommand{\lstlistlistingname}{Code examples}
 \lstset{
     inputencoding=utf8,
     columns=fullflexible,
@@ -210,6 +212,12 @@
     }
 }{}
  
+%% verbatim setup
+\bvtopandtail % \bvsides
+\setlength{\bvboxsep}{.25em}
+\tabson[4]
+\setverbatimfont{\normalfont\ttfamily\small}
+
 %%%
 %%% Language, localizations, hyphenation
 %%%

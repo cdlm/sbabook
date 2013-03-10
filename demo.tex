@@ -19,16 +19,17 @@
 
 \frontmatter
 
-\tableofcontents
+\tableofcontents*
 \listoffigures
 \listoftables
+\lstlistoflistings
 
 \mainmatter
 
 
 \chapter{A small chapter in Latin}
 
-\chapterprecis{Demonstrating simple paragraphs and section headings, as well as a rather long precis.}
+\chapterprecis{Demonstrating simple paragraphs and section headings, as well as a rather long precis, so that it uses at least two lines, even in the table of contents.}
 
 \sidepar{Testing the margin note layout, hopefully this much text is enough to see what it looks like.}%
 \textlatin{\lipsum[1-2]}
@@ -80,7 +81,7 @@
 % \part{Épisode premier}
 
 \chapter{Another empty chapter, except for the figures, tables, and really long title}
-\chapterprecis{Long titles happen, and the heading needs to support it.}
+\chapterprecis{Long titles happen, and the heading needs to support it, but hyphenation should be avoided and lines balanced.}
 
 \begin{leftbar}
     \lipsum[2]
@@ -154,6 +155,13 @@ Content-Type: text/html;charset=utf-8
 
 \chapter{When will the chapters stop?}
 \chapterprecis{wheeennnnn?}
+
+\begin{boxedverbatim}
+Hello
+  this is verbatim
+with some indents using spaces
+	and others using tabs
+\end{boxedverbatim}
 
 \chapter{More chapters}
 \chapterprecis{This is not boring at all.}

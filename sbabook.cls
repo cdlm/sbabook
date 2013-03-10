@@ -37,6 +37,8 @@
 \setmainfont{Gentium Book Basic}
 \setsansfont[Scale=MatchLowercase]{Open Sans}
 \setmonofont[Scale=MatchLowercase]{Inconsolata}
+
+\noindentafterchapter
 \setlength{\parindent}{1.5em}
 
 %% XeLaTeX support not there yet…
@@ -60,17 +62,31 @@
 %%%
 
 %% chapter heading
-\chapterstyle{veelo} % TODO use \makeheadstyles (p.112 of memoir manual)
-\noindentafterchapter
-\renewcommand\chapterheadstart{}
-\renewcommand\printchaptername{%
-    \chapnamefont\MakeUppercase\@chapapp}
-\renewcommand\chapnamefont{%
-    \LARGE\sffamily\bfseries
-    \addfontfeature{LetterSpace=20}%
-    \flushright}
-\renewcommand\chapnumfont{\HUGE\sffamily\bfseries}
-\renewcommand\chaptitlefont{\HUGE\sffamily\mdseries\flushright}
+\newlength{\chapnumheight}\setlength{\chapnumheight}{18mm}
+\newlength{\chapbarwidth}\setlength{\chapbarwidth}{11mm}
+\makechapterstyle{sba}{%
+    \renewcommand{\chapnamefont}{%
+        \LARGE\sffamily\bfseries
+        \addfontfeature{LetterSpace=20}%
+        \flushright\MakeUppercase}
+    \renewcommand{\chapnumfont}{%
+        \HUGE\sffamily\bfseries
+        \addfontfeature{Numbers={Proportional,Lining}}}
+    \renewcommand{\chaptitlefont}{\HUGE\sffamily\mdseries\flushright}
+    \setlength{\afterchapskip}{40pt}
+    \renewcommand*{\chapterheadstart}{}
+    \renewcommand*{\chapternamenum}{}
+    \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt}
+    \setlength{\midchapskip}{\paperwidth}
+    \addtolength{\midchapskip}{-\textwidth}
+    \addtolength{\midchapskip}{-\spinemargin}
+    \addtolength{\midchapskip}{-\chapbarwidth}
+    \renewcommand*{\printchapternum}{%
+        \resizebox{!}{\chapnumheight}{\chapnumfont \,\thechapter\,}%
+        \makebox[-\midchapskip][l]{%
+            \rule{1.5\chapbarwidth}{\chapnumheight}%
+    }}}
+\chapterstyle{sba}
 
 %% chapter precis
 \renewcommand\precisfont{\normalfont\sffamily}

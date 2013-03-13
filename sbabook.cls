@@ -150,6 +150,18 @@
 \cftsetindents{subsection}{0pt}{3em}
 \setrmarg{3.55em plus 1fil}% help avoid hyphenation
 
+%% figures & tables, like sections
+\let\cftfigurefont\cftsectionfont
+\let\cftfigurepagefont\cftfigurefont
+\cftsetindents{figure}{0pt}{0em}
+\renewcommand{\cftfigurepresnum}{\hspace{-4em}\hfill}
+\renewcommand{\cftfigureaftersnum}{\quad}
+\let\cfttablefont\cftsectionfont
+\let\cfttablepagefont\cfttablefont
+\cftsetindents{table}{0pt}{0em}
+\renewcommand{\cfttablepresnum}{\hspace{-4em}\hfill}
+\renewcommand{\cfttableaftersnum}{\quad}
+
 % merged list of figures/tables: \newlistofb ?
 
 %%%

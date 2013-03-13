@@ -94,23 +94,23 @@
         \resizebox{!}{\chapnumheight}{\chapnumfont \,\thechapter\,}%
         \makebox[-\midchapskip][l]{%
             \rule{1.5\chapbarwidth}{\chapnumheight}%
-        }}}
+        }}
+    %% chapter precis
+    \renewcommand\precisfont{\normalfont\sffamily}
+    \setlength{\prechapterprecisshift}{-4\baselineskip}
+    \renewcommand\prechapterprecis{%
+        \vspace*{\prechapterprecisshift}%
+        \begin{flushright}\begin{balanced}{\linewidth}%
+        \RaggedLeft\precisfont}
+    \renewcommand\postchapterprecis{%
+        \end{balanced}\end{flushright}}
+    %%% fix indentation of 1st paragraph after \chapterprecis
+    %% cf https://groups.google.com/forum/#!msg/comp.text.tex/yj4ZoVlbSKE/5hJXO-2jG5EJ
+    \addtoiargdef\chapterprecis{}{%
+        \par\@afterheading\m@mindentafterchapter}}
+
 \chapterstyle{sba}
 
-%% chapter precis
-\renewcommand\precisfont{\normalfont\sffamily}
-\setlength{\prechapterprecisshift}{-2.5\baselineskip}
-\renewcommand\prechapterprecis{%
-    \vspace*{\prechapterprecisshift}%
-    \begin{flushright}\begin{balanced}{\linewidth}%
-        \RaggedLeft\precisfont}
-\renewcommand\postchapterprecis{%
-    \end{balanced}\end{flushright}}
-%%% fix indentation of 1st paragraph after \chapterprecis
-%% cf https://groups.google.com/forum/#!msg/comp.text.tex/yj4ZoVlbSKE/5hJXO-2jG5EJ
-\addtoiargdef\chapterprecis{}{%
-    \par\@afterheading\m@mindentafterchapter}
-%%% end fix
 
 %% sections & below
 \setsecheadstyle      {\LARGE\sffamily\bfseries}
@@ -132,7 +132,10 @@
 \renewcommand\cftchapterfont{\sffamily\bfseries}
 \let\cftchapterpagefont\cftchapterfont
 \renewcommand\precistocfont{\normalfont\sffamily\itshape\small}
-\renewcommand\precistocformat{\noindent\narrowragged}
+\renewcommand\precistocformat{% discourage hyphenation
+    \hyphenpenalty=5000
+    \tolerance=1000
+    \noindent\narrowragged}
 % TODO balance precis in TOC
 \renewcommand\cftsectionfont{\sffamily}
 \let\cftsectionpagefont\cftsectionfont

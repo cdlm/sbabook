@@ -42,6 +42,8 @@
 \setsansfont[Scale=MatchLowercase,Numbers=OldStyle]{Open Sans}
 \setmonofont[Scale=MatchLowercase]{Inconsolata}
 
+\RequirePackage{microtype}
+
 \noindentafterchapter
 \setlength{\parindent}{1.5em}
 

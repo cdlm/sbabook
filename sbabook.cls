@@ -84,7 +84,7 @@
         \HUGE\sffamily\bfseries
         \addfontfeature{Numbers={Proportional,Lining}}}
     \renewcommand{\chaptitlefont}{\HUGE\sffamily\mdseries\flushright}
-    \setlength{\afterchapskip}{40pt}
+    \setlength{\afterchapskip}{4\baselineskip}
     \renewcommand*{\chapterheadstart}{}
     \renewcommand*{\chapternamenum}{}
     \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt}
@@ -98,14 +98,33 @@
             \rule{1.5\chapbarwidth}{\chapnumheight}%
         }}
     %% chapter precis
-    \renewcommand\precisfont{\normalfont\sffamily}
-    \setlength{\prechapterprecisshift}{-4\baselineskip}
-    \renewcommand\prechapterprecis{%
-        \vspace*{\prechapterprecisshift}%
-        \begin{flushright}\begin{balanced}{\linewidth}%
-        \RaggedLeft\precisfont}
-    \renewcommand\postchapterprecis{%
-        \end{balanced}\end{flushright}}
+    \renewcommand\precisfont{\normalfont\sffamily\RaggedLeft}
+    \newlength{\postchapterprecisskip}
+    \setlength{\prechapterprecisshift}{3\baselineskip}
+    \setlength{\postchapterprecisskip}{\baselineskip}
+    \renewcommand\prechapterprecis{\vspace*{-\prechapterprecisshift}}
+    \renewcommand\postchapterprecis{\vspace*{\postchapterprecisskip}}
+    \newsavebox\sba@precisbox
+    \newlength\sba@precisboxht
+    \newlength\sba@precisboxdp
+    \renewcommand\chapterprecishere[1]{%
+        \begin{lrbox}{\sba@precisbox}%
+            \begin{minipage}[t]{\linewidth}%
+                \prechapterprecis
+                \flushright
+                \begin{balanced}{\linewidth}%
+                    \precisfont\strut##1\strut%
+                \end{balanced}%
+                \postchapterprecis
+            \end{minipage}%
+        \end{lrbox}%
+        \settoheight\sba@precisboxht{\usebox\sba@precisbox}%
+        \settoheight\sba@precisboxdp{\usebox\sba@precisbox}%
+        \addtolength\sba@precisboxht{\sba@precisboxdp}%
+        \usebox{\sba@precisbox}\par\unskip%
+        \ifnum\sba@precisboxht<0pt
+            \vspace*{-\sba@precisboxht}
+        \fi}
     %%% fix indentation of 1st paragraph after \chapterprecis
     %% cf https://groups.google.com/forum/#!msg/comp.text.tex/yj4ZoVlbSKE/5hJXO-2jG5EJ
     \addtoiargdef\chapterprecis{}{%

@@ -3,6 +3,8 @@
 
 \DeclareOption{showtrims}{%
     \PassOptionsToClass{showtrims}{memoir}}
+\DeclareOption{openany}{%
+    \PassOptionsToClass{openany}{memoir}}
 
 \ProcessOptions\relax
 \LoadClass[
@@ -10,8 +12,6 @@
     twoside,
     smallroyalvopaper
 ]{memoir}
-
-\RequirePackage{iftex}\RequireXeTeX
 
 \RequirePackage{graphicx}
 \RequirePackage{xcolor}

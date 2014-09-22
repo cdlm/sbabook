@@ -84,7 +84,6 @@
         \HUGE\sffamily\bfseries
         \addfontfeature{Numbers={Proportional,Lining}}}
     \renewcommand{\chaptitlefont}{\HUGE\sffamily\mdseries\flushright}
-    \setlength{\afterchapskip}{4\baselineskip}
     \renewcommand*{\chapterheadstart}{}
     \renewcommand*{\chapternamenum}{}
     \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt}
@@ -97,40 +96,50 @@
         \makebox[-\midchapskip][l]{%
             \rule{1.5\chapbarwidth}{\chapnumheight}%
         }}
+    \setlength{\afterchapskip}{8\baselineskip}
     %% chapter precis
-    \renewcommand\precisfont{\normalfont\sffamily\RaggedLeft}
+    \renewcommand\precisfont{\normalfont\sffamily\RaggedLeft\small}
     \newlength{\postchapterprecisskip}
-    \setlength{\prechapterprecisshift}{3\baselineskip}
+    \setlength{\prechapterprecisshift}{-4\baselineskip}
     \setlength{\postchapterprecisskip}{\baselineskip}
-    \renewcommand\prechapterprecis{\vspace*{-\prechapterprecisshift}}
+    \renewcommand\prechapterprecis{%
+      \precisfont
+      \vspace*{-\postchapterprecisskip}%
+      \vspace*{-4\baselineskip}}
     \renewcommand\postchapterprecis{\vspace*{\postchapterprecisskip}}
-    \newsavebox\sba@precisbox
-    \newlength\sba@precisboxht
-    \newlength\sba@precisboxdp
-    \renewcommand\chapterprecishere[1]{%
-        \begin{lrbox}{\sba@precisbox}%
-            \begin{minipage}[t]{\linewidth}%
-                \prechapterprecis
-                \flushright
-                \begin{balanced}{\linewidth}%
-                    \precisfont\strut##1\strut%
-                \end{balanced}%
-                \postchapterprecis
-            \end{minipage}%
-        \end{lrbox}%
-        \settoheight\sba@precisboxht{\usebox\sba@precisbox}%
-        \settoheight\sba@precisboxdp{\usebox\sba@precisbox}%
-        \addtolength\sba@precisboxht{\sba@precisboxdp}%
-        \usebox{\sba@precisbox}\par\unskip%
-        \ifnum\sba@precisboxht<0pt
-            \vspace*{-\sba@precisboxht}
-        \fi}
     %%% fix indentation of 1st paragraph after \chapterprecis
     %% cf https://groups.google.com/forum/#!msg/comp.text.tex/yj4ZoVlbSKE/5hJXO-2jG5EJ
-    \addtoiargdef\chapterprecis{}{%
-        \par\@afterheading\m@mindentafterchapter}}
+  %  \addtoiargdef\chapterprecis{}{%
+  %   \par\@afterheading\m@mindentafterchapter}
+  }
 
 \chapterstyle{sba}
+% \renewcommand\chapterprecishere[1]{%
+%     \prevgraf0
+%     \prechapterprecis #1\postchapterprecis
+%     {\count0 \numexpr3-\prevgraf\relax
+%         \precisfont% just needed in case this did a size change so get right baseline
+%         \ifnum\count0 >0 \vspace{\count0 \baselineskip}\fi}}
+\renewcommand\chapterprecishere[1]{%
+  {\prechapterprecis
+    \begin{minipage}[t]{\linewidth}%
+      \flushright
+      \begin{balanced}{\linewidth}%
+        \prevgraf0
+        \strut#1\strut\par
+        \xdef\precistmp{\noexpand\precisskip{\the\prevgraf}{\the\baselineskip}}%
+      \end{balanced}\par%
+    \end{minipage}%
+    \precistmp
+    \postchapterprecis
+  }%
+  \par
+  \@afterheading
+}
+\def\precisskip#1#2{{%
+    \count0 \numexpr4-#1\relax
+    \dimen0=#2 %
+    \ifnum\count0 >0 \vspace*{\count0 \dimen0}\fi}}
 
 
 %% sections & below

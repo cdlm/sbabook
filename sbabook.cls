@@ -279,7 +279,6 @@
 %%% Source code
 %%%
 \RequirePackage{listings}
-\RequirePackage{lstsmalltalk}
 
 \renewcommand{\lstlistlistingname}{Code examples}
 \lstset{

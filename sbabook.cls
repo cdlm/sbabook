@@ -56,10 +56,6 @@
 \noindentafterchapter
 \setlength{\parindent}{1.5em}
 
-%% XeLaTeX support not there yet…
-%% http://tex.stackexchange.com/questions/2986/margin-kerning-in-xelatex-for-texlive-2010-how-to-enable
-% \usepackage{microtype}
-
 \RequirePackage{ragged2e}
 \RaggedRight
 \RequirePackage{varwidth}
@@ -165,6 +161,7 @@
 \setsecnumdepth{section}
 \settocdepth{section}
 
+
 %%%
 %%% Table of contents etc
 %%%
@@ -175,6 +172,7 @@
     \hyphenpenalty=5000
     \tolerance=1000
     \noindent\narrowragged}
+
 % TODO balance precis in TOC
 \renewcommand\cftsectionfont{\sffamily}
 \let\cftsectionpagefont\cftsectionfont
@@ -265,7 +263,7 @@
         mathescape=false,
     }
 }{}
- 
+
 %% verbatim setup
 \bvtopandtail % \bvsides
 \setlength{\bvboxsep}{.25em}

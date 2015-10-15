@@ -12,18 +12,15 @@
 %%%
 %%% Page layout
 %%%
+\newcommand\stockustrade{\setstocksize{9in}{6in}}
+\newcommand\setbleed[1]{%
+    \settrimmedsize{\stockheight}{\stockwidth}{*}%
+    \settrims{#1}{#1}%
+    \advance\stockheight 2\trimtop
+    \advance\stockwidth  2\trimedge}
+
 \settypeoutlayoutunit{mm}
-\setlrmarginsandblock{1in}{*}{*}
-\setulmarginsandblock{.75in}{.75in}{*}
-\ifshowtrims % use the showtrims option to switch to A4 paper + blue trimlines
-    \stockaiv
-    \trimFrame
-    \setlength{\trimtop}{.5\stockheight}
-    \addtolength{\trimtop}{-.5\paperheight}
-    \setlength{\trimedge}{.5\stockwidth}
-    \addtolength{\trimedge}{-.5\paperwidth}
-\else\fi
-\checkandfixthelayout
+
 \raggedbottom
 
 %%%

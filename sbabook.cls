@@ -191,6 +191,13 @@
 %%%
 %%% Table of contents etc
 %%%
+\addtodef\tableofcontents{\clearforchapter}{}
+\renewcommand\cftpartfont{\sffamily\large\bfseries}
+\let\cftpartpagefont\cftpartfont% unused, but for coherence
+\renewcommand\cftpartleader{}
+\renewcommand\cftpartafterpnum{\cftparfillskip}
+\cftpagenumbersoff{part}
+
 \renewcommand\cftchapterfont{\sffamily\bfseries}
 \let\cftchapterpagefont\cftchapterfont
 \renewcommand\precistocfont{\normalfont\sffamily\itshape\small}
@@ -204,6 +211,9 @@
 \let\cftsectionpagefont\cftsectionfont
 \renewcommand\cftsubsectionfont{\sffamily\itshape}
 \let\cftsubsectionpagefont\cftsectionfont
+\cftsetindents{part}{0pt}{0em}
+\renewcommand{\cftpartpresnum}{\hspace{-4em}\hfill}
+\renewcommand{\cftpartaftersnum}{\quad}
 \cftsetindents{chapter}{0pt}{0em}
 \renewcommand{\cftchapterpresnum}{\hspace{-4em}\hfill}
 \renewcommand{\cftchapteraftersnum}{\quad}

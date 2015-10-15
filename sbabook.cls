@@ -1,17 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sbabook}[2013/03/08]
 
-\DeclareOption{showtrims}{%
-    \PassOptionsToClass{showtrims}{memoir}}
-\DeclareOption{openany}{%
-    \PassOptionsToClass{openany}{memoir}}
-
-\ProcessOptions\relax
-\LoadClass[
-    10pt,
-    twoside,
-    smallroyalvopaper
-]{memoir}
+% \ExecuteOptions{a4paper,11pt,twoside}
+\ProcessOptions*
+\LoadClassWithOptions{memoir}
 
 \RequirePackage{graphicx}
 \RequirePackage{xcolor}

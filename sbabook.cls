@@ -102,7 +102,6 @@
 
 %% chapter heading
 \newlength{\chapnumheight}\setlength{\chapnumheight}{18mm}
-\newlength{\chapbarwidth}\setlength{\chapbarwidth}{11mm}
 \makechapterstyle{sba}{%
     \renewcommand{\chapnamefont}{%
         \LARGE\sffamily\bfseries
@@ -115,15 +114,11 @@
     \renewcommand*{\chapterheadstart}{}
     \renewcommand*{\chapternamenum}{}
     \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt}
-    \setlength{\midchapskip}{\paperwidth}
-    \addtolength{\midchapskip}{-\textwidth}
-    \addtolength{\midchapskip}{-\spinemargin}
-    \addtolength{\midchapskip}{-\chapbarwidth}
     \renewcommand*{\printchapternum}{%
-        \resizebox{!}{\chapnumheight}{\chapnumfont \,\thechapter\,}%
-        \makebox[-\midchapskip][l]{%
-            \rule{1.5\chapbarwidth}{\chapnumheight}%
-        }}
+        \resizebox{!}{\chapnumheight}{\chapnumfont \,\thechapter}%
+        \rlap{%
+          \kern .3\chapnumheight
+          \rule{\foremargin}{\chapnumheight}}}
     \setlength{\afterchapskip}{8\baselineskip}
     %% chapter precis
     \renewcommand\precisfont{\normalfont\sffamily\RaggedLeft\small}
@@ -141,7 +136,6 @@
   %   \par\@afterheading\m@mindentafterchapter}
   }
 
-\chapterstyle{sba}
 % \renewcommand\chapterprecishere[1]{%
 %     \prevgraf0
 %     \prechapterprecis #1\postchapterprecis
@@ -170,17 +164,26 @@
     \ifnum\count0 >0 \vspace*{\count0 \dimen0}\fi}}
 
 
-%% sections & below
-\setsecheadstyle      {\LARGE\sffamily\bfseries}
-\setsubsecheadstyle   {\Large\sffamily\bfseries}
-\setsubsubsecheadstyle{\Large\sffamily}
-\setparaheadstyle     {\sffamily\bfseries}
-\setsubparaheadstyle  {\sffamily}
-\setsecnumformat{%
+\makeheadstyles{sba}{%
+  \renewcommand*{\booknamefont} {\normalfont\huge\sffamily}
+  \renewcommand*{\booknumfont}  {\normalfont\huge\sffamily}
+  \renewcommand*{\booktitlefont}{\normalfont\Huge\sffamily}
+  \renewcommand*{\partnamefont} {\normalfont\huge\sffamily}
+  \renewcommand*{\partnumfont}  {\normalfont\huge\sffamily}
+  \renewcommand*{\parttitlefont}{\normalfont\Huge\sffamily}
+  \chapterstyle{sba}
+  \setsecheadstyle      {\LARGE\sffamily\bfseries}
+  \setsubsecheadstyle   {\Large\sffamily\bfseries}
+  \setsubsubsecheadstyle{\Large\sffamily}
+  \setparaheadstyle     {\sffamily\bfseries}
+  \setsubparaheadstyle  {\sffamily}
+  \setsecnumformat{%
     \llap{\mdseries
-        \csname the#1\endcsname
-        \quad}}
+      \csname the##1\endcsname
+      \quad}}
+}
 
+\headstyles{sba}
 \setsecnumdepth{section}
 \settocdepth{section}
 

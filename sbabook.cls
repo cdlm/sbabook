@@ -55,6 +55,8 @@
 
 \noindentafterchapter
 \setlength{\parindent}{1.5em}
+\nonzeroparskip
+\firmlists
 
 \RequirePackage{ragged2e}
 \RaggedRight

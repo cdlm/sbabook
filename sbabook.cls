@@ -242,25 +242,25 @@
 %%%
 \def\headfootfont{\small\sffamily}
 %% main page style variant
-\makepagestyle{pierbook-headings}
-\makeevenhead{pierbook-headings}{}{}{\ifonlyfloats{}{\headfootfont\leftmark}}
-\makeoddhead {pierbook-headings}{\ifonlyfloats{}{\headfootfont\rightmark}}{}{}
-\makeevenfoot{pierbook-headings}{\headfootfont\bfseries\thepage}{}{}
-\makeoddfoot {pierbook-headings}{}{}{\headfootfont\bfseries\thepage}
-\makepsmarks{pierbook-headings}{\nouppercaseheads
+\makepagestyle{sba-headings}
+\makeevenhead{sba-headings}{}{}{\ifonlyfloats{}{\headfootfont\leftmark}}
+\makeoddhead {sba-headings}{\ifonlyfloats{}{\headfootfont\rightmark}}{}{}
+\makeevenfoot{sba-headings}{\headfootfont\bfseries\thepage}{}{}
+\makeoddfoot {sba-headings}{}{}{\headfootfont\bfseries\thepage}
+\makepsmarks{sba-headings}{\nouppercaseheads
     \createmark{chapter}{left}{nonumber}{}{}
     \createmark{section}{right}{shownumber}{}{\quad}}
 %% page style variant without headings
-\makepagestyle{pierbook-plain}
-\makeevenfoot{pierbook-plain}{\headfootfont\bfseries\thepage}{}{}
-\makeoddfoot {pierbook-plain}{}{}{\headfootfont\bfseries\thepage}
+\makepagestyle{sba-plain}
+\makeevenfoot{sba-plain}{\headfootfont\bfseries\thepage}{}{}
+\makeoddfoot {sba-plain}{}{}{\headfootfont\bfseries\thepage}
 %% no folio on float-only pages
-\mergepagefloatstyle{pierbook}{pierbook-headings}{empty}
+\mergepagefloatstyle{sba}{sba-headings}{empty}
 
-\pagestyle{pierbook}
+\aliaspagestyle{plain}{sba}
 \aliaspagestyle{book}{empty}
 \aliaspagestyle{part}{empty}
-\aliaspagestyle{chapter}{pierbook-plain}
+\aliaspagestyle{chapter}{sba-plain}
 
 %%%
 %%% Floats

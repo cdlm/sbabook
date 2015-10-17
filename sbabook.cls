@@ -191,12 +191,16 @@
 %%%
 %%% Table of contents etc
 %%%
+\cftpagenumbersoff{part}
+\setlength{\cftbeforepartskip}{2em plus 1.5em minus .75em}
+
 \addtodef\tableofcontents{\clearforchapter}{}
 \renewcommand\cftpartfont{\sffamily\large\bfseries}
 \let\cftpartpagefont\cftpartfont% unused, but for coherence
 \renewcommand\cftpartleader{}
 \renewcommand\cftpartafterpnum{\cftparfillskip}
-\cftpagenumbersoff{part}
+\setlength{\cftbeforechapterskip}{1em plus .5em minus .2em}
+\renewcommand{\cftchapterbreak}{\pagebreak[2]}
 
 \renewcommand\cftchapterfont{\sffamily\bfseries}
 \let\cftchapterpagefont\cftchapterfont

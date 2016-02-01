@@ -277,7 +277,15 @@
 %%% Graphics
 %%%
 \RequirePackage{tikz}
+\usetikzlibrary{calc}
 \definecolor{shadecolor}{gray}{0.9} % FIXME really needed?
+
+% dash pattern for margin brackets that cross pages
+% last dash is supposed to be infinite but in practice the page height is enough
+\tikzstyle{dashfade}=[
+  dash pattern = on 0.5pt off 1pt on 1pt off 1pt on 2pt off 1pt on \paperheight]
+
+\RequirePackage[listings,breakable,skins]{tcolorbox}
 
 %%%
 %%% Source code
@@ -287,8 +295,49 @@
 \renewcommand{\lstlistlistingname}{Code examples}
 \lstset{
     inputencoding=utf8,
+    aboveskip=0pt, belowskip=0pt,
     columns=fullflexible,
-    basicstyle=\small\ttfamily
+    breaklines=true,
+    breakatwhitespace=true,
+    showstringspaces=false,
+    mathescape=false,
+    tabsize=2,
+    basicstyle=\small\ttfamily,
+    keywordstyle={},
+    stringstyle={},
+    commentstyle={},
+}
+
+% main block-level listing, breakable across multiple pages, with a bracket in
+% the left margin
+\newtcblisting{listing}[1][]{
+  breakable,
+  empty, size = minimal,
+  colback = white,
+  frame style = {fill = none},
+  frame code = {\draw
+    ([xshift=-2pt]frame.south west)
+    --([xshift=-4pt]frame.south west)
+    --([xshift=-4pt]frame.north west)
+    --([xshift=-2pt]frame.north west);
+  },
+  skin first is subskin of = {emptyfirst}{%
+    frame code = {
+      \draw[dashfade] ([xshift=-4pt]frame.south west) |- ([xshift=-2pt]frame.north west);
+    }},
+  skin middle is subskin of = {emptymiddle}{%
+    frame code = {
+      \draw[dashfade] ([xshift=-4pt]frame.south west)
+      --($([xshift=-4pt]frame.south west)!.5!([xshift=-4pt]frame.north west)$);
+      \draw[dashfade] ([xshift=-4pt]frame.north west)
+      --($([xshift=-4pt]frame.south west)!.5!([xshift=-4pt]frame.north west)$);
+    }},
+  skin last is subskin of = {emptylast}{%
+    frame code = {
+      \draw[dashfade] ([xshift=-4pt]frame.north west) |- ([xshift=-2pt]frame.south west);
+    }},
+  %
+  listing only, listing options = {#1}
 }
 
 \lstnewenvironment{script}[2][defaultlabel]{%

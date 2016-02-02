@@ -1,7 +1,9 @@
-SBAbook — A LaTeX book class for Smalltalk books
+SBAbook — A LaTeX book class for technical books
 ================================================
 
 This is a set of layout, typography, and markup definitions for LaTeX books based on the [memoir][] document class. It is intended for use by [Square Bracket Associates][sba], and heavily customized in this direction.
+
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=cdlm&url=https://github.com/cdlm/sbabook&title=sbabook&description=A%20LaTeX%20book%20class%20for%20technical%20books&tags=github,LaTeX,typography&category=software)
 
 ## Usage (nearly there)
 

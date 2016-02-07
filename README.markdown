@@ -3,7 +3,7 @@ SBAbook — A LaTeX book class for technical books
 
 This is a set of layout, typography, and markup definitions for LaTeX books based on the [memoir][] document class. It is intended for use by [Square Bracket Associates][sba], and heavily customized in this direction.
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=cdlm&url=https://github.com/cdlm/sbabook&title=sbabook&description=A%20LaTeX%20book%20class%20for%20technical%20books&tags=github,LaTeX,typography&category=software)
+<a href="https://flattr.com/submit/auto?url=https%3A%2F%2Fgithub.com%2Fcdlm%2Fsbabook" target="_blank"><img src="https://button.flattr.com/flattr-badge-large.png" alt="Flattr this git repo" title="Flattr this git repo" border="0"></a>
 
 ## Usage (nearly there)
 

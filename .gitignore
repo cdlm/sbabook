@@ -1,6 +1,7 @@
 *.aux
 *.fdb_latexmk
 *.fls
+*.gin
 *.lof
 *.log
 *.lol
@@ -8,5 +9,4 @@
 *.toc
 .auctex/
 /auto/
-gitHeadInfo.gin
 sbabook.pdf

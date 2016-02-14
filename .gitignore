@@ -3,7 +3,10 @@
 *.fls
 *.lof
 *.log
+*.lol
 *.lot
 *.toc
-*.lol
+.auctex/
 /auto/
+gitHeadInfo.gin
+sbabook.pdf

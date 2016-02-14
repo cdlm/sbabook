@@ -1,0 +1,56 @@
+\documentclass[english,twoside,openany]{sbabook}
+
+\stockustrade
+\setbleed{.125in}
+\setlrmarginsandblock{.75in}{*}{*}
+\setulmarginsandblock{.75in}{.75in}{*}
+\checkandfixthelayout
+\typeoutlayout
+
+\usepackage[useregional]{datetime2}
+
+% extract info from git commit
+% requires gitinfo2 2.0.7, and below fix needed until 2.0.8 released
+\makeatletter
+\let\THEDAY\@dtm@currentday
+\let\THEMONTH\@dtm@currentmonth
+\let\THEYEAR\@dtm@currentyear
+\makeatother
+\usepackage[local,dirty=*]{gitinfo2}
+\usepackage{xstring}% \IfEq and \StrCut
+% a couple extensions...
+\makeatletter
+\newcommand\gitCommitInfo{%
+  \IfEq{\gitRel}{}
+  {commit \texttt{\gitAbbrevHash\gitDirty}}
+  {\IfEq{\gitRoff}{0}
+    {release \gitRel}
+    {modified since release \gitRel{} --- commit \texttt{\gitAbbrevHash\gitDirty}}}}
+\newcommand\gitdate{\DTMusedate{gitdate}}
+\makeatother
+
+\setotherlanguage{latin}
+\usepackage{lipsum}
+
+\usepackage{url} % define and apply style to URLs
+\def\url@sfstyle{\def\UrlFont{\sf}}
+\urlstyle{sf}
+\usepackage[unicode,breaklinks,hidelinks]{hyperref} % undecorated hyperlinks
+
+\title{the Square Bracket Associates\titlebreak{}
+  \texorpdfstring{\protect\LaTeX}{LaTeX} book class}
+\author{Damien Pollet}
+\date{\gitdate\titlebreak[\smallskip]{ -- }\protect\gitCommitInfo}
+
+\hypersetup{pdfinfo = {
+    Title = {\thetitle},
+    Author = {\theauthor},
+    Keywords = {LaTeX, document class, book, typography}}}
+
+\begin{document}
+\maketitle
+
+
+\textlatin{\lipsum[3]}
+
+\end{document}

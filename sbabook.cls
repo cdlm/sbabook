@@ -278,6 +278,7 @@
 %%%
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing}
 \definecolor{shadecolor}{gray}{0.9} % FIXME really needed?
 
 % dash pattern for margin brackets that cross pages
@@ -302,61 +303,103 @@
     showstringspaces=false,
     mathescape=false,
     tabsize=2,
-    basicstyle=\small\ttfamily,
+    basicstyle=\tiny\ttfamily\bfseries,
     keywordstyle={},
     stringstyle={},
     commentstyle={},
 }
 
-% main block-level listing, breakable across multiple pages, with a bracket in
-% the left margin
-\newtcblisting{listing}[1][]{
-  breakable,
-  empty, size = minimal,
-  colback = white,
-  frame style = {fill = none},
-  frame code = {\draw
-    ([xshift=-2pt]frame.south west)
-    --([xshift=-4pt]frame.south west)
-    --([xshift=-4pt]frame.north west)
-    --([xshift=-2pt]frame.north west);
-  },
-  skin first is subskin of = {emptyfirst}{%
-    frame code = {
-      \draw[dashfade] ([xshift=-4pt]frame.south west) |- ([xshift=-2pt]frame.north west);
-    }},
-  skin middle is subskin of = {emptymiddle}{%
-    frame code = {
-      \draw[dashfade] ([xshift=-4pt]frame.south west)
-      --($([xshift=-4pt]frame.south west)!.5!([xshift=-4pt]frame.north west)$);
-      \draw[dashfade] ([xshift=-4pt]frame.north west)
-      --($([xshift=-4pt]frame.south west)!.5!([xshift=-4pt]frame.north west)$);
-    }},
-  skin last is subskin of = {emptylast}{%
-    frame code = {
-      \draw[dashfade] ([xshift=-4pt]frame.north west) |- ([xshift=-2pt]frame.south west);
-    }},
-  %
-  listing only, listing options = {#1}
+
+\lstdefinelanguage{plain}{}% verbatim, plain text
+
+% inline code
+\def\code{\lstinline[basicstyle=\ttfamily]}
+
+\tcbset{
+  sba/.style = {
+    empty, size = minimal,
+    fonttitle=\sffamily,
+    colback = white,
+    frame style = {fill = none},
+    frame code = {\draw
+      ([xshift=-2pt]interior.south west)
+      --([xshift=-4pt]interior.south west)
+      --([xshift=-4pt]interior.north west)
+      --([xshift=-2pt]interior.north west);
+    },
+    skin first is subskin of = {emptyfirst}{%
+      frame code = {
+        \draw[dashfade] ([xshift=-4pt]interior.south west) |- ([xshift=-2pt]interior.north west);
+      }},
+    skin middle is subskin of = {emptymiddle}{%
+      frame code = {
+        \draw[dashfade] ([xshift=-4pt]interior.south west)
+        --($([xshift=-4pt]interior.south west)!.5!([xshift=-4pt]interior.north west)$);
+        \draw[dashfade] ([xshift=-4pt]frame.north west)
+        --($([xshift=-4pt]interior.south west)!.5!([xshift=-4pt]interior.north west)$);
+      }},
+    skin last is subskin of = {emptylast}{%
+      frame code = {
+        \draw[dashfade] ([xshift=-4pt]interior.north west) |- ([xshift=-2pt]interior.south west);
+      }},
+  }
 }
 
-\lstnewenvironment{script}[2][defaultlabel]{%
-    % \renewcommand{\lstlistingname}{Script}%
-    \lstset{
-        name={Script},
-        caption={\emph{#2}},
-        label={scr:#1},
-        frame=tb,
-        framerule=\heavyrulewidth,
-        mathescape=false,
-    }
-}{}
+% main block-level listing, breakable across multiple pages, with a bracket in
+% the left margin
+\newtcblisting[
+    auto counter,
+    number within = chapter
+]{listing}[2][]{
+  breakable, sba,
+  %
+  listing only,
+  listing options = { language = {#2} },
+  #1
+}
+
+% \lstnewenvironment{script}[2][defaultlabel]{%
+%     % \renewcommand{\lstlistingname}{Script}%
+%     \lstset{
+%         name={Script},
+%         caption={\emph{#2}},
+%         label={scr:#1},
+%         frame=tb,
+%         framerule=\heavyrulewidth,
+%         mathescape=false,
+%     }
+% }{}
 
 %% verbatim setup
 \bvtopandtail % \bvsides
 \setlength{\bvboxsep}{.25em}
 \tabson[4]
 \setverbatimfont{\normalfont\ttfamily\small}
+
+\DeclareRobustCommand{\LaTeX}{%
+  {% copied from Grzegorz Murzynowski's article in TUGboat 29(1)
+    L%
+    \setbox\z@\hbox{\check@mathfonts
+      \fontsize\sf@size\z@
+      \math@fontsfalse\selectfont
+      A}%
+    \kern-.57\wd\z@
+    \sbox\tw@ T%
+    \vbox to\ht\tw@{\copy\z@ \vss}%
+    \kern-.2\wd\z@}%
+  {%
+    \ifdim\fontdimen1\font=\z@
+    \else
+      \count\z@=\fontdimen5\font
+      \multiply\count\z@ by 64\relax
+      \divide\count\z@ by\p@
+      \count\tw@=\fontdimen1\font
+      \multiply\count\tw@ by\count\z@
+      \divide\count\tw@ by 64\relax
+      \divide\count\tw@ by\tw@
+      \kern-\the\count\tw@ sp\relax
+    \fi}%
+  \TeX}
 
 %%%
 %%% Language, localizations, hyphenation

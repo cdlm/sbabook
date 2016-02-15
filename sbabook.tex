@@ -35,6 +35,8 @@
 \usepackage{multirow}
 \usepackage{graphicx}
 
+\usepackage{lstsmalltalk}
+
 \usepackage{url} % define and apply style to URLs
 \def\url@sfstyle{\def\UrlFont{\sf}}
 \urlstyle{sf}
@@ -50,10 +52,13 @@
     Author = {\theauthor},
     Keywords = {LaTeX, document class, book, typography}}}
 
-
+\newcommand\hrefnote[2]{% inline linked text, plus URL in footnote
+  % #1: URL, #2: link text
+  \href{#1}{#2}\footnote{\url{#1}}}
 
 \begin{document}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page and colophon on verso
 \maketitle
 \pagestyle{titlingpage}
@@ -114,7 +119,135 @@
 \frontmatter
 \pagestyle{plain}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{About this document}
 
+This document is both the showcase and documentation of the SBAbook document
+class.
+You are of course encouraged to check its code, as a source of concrete examples.
+
+The primary goals of the SBAbook class are:
+\begin{itemize}
+\item to provide a nice design for the Square Bracket Associates books,
+\item to work as an export target for
+  \hrefnote{https://github.com/pillar-markup}{Pillar}, the documentation markup
+  used in the \hrefnote{http://pharo.org}{Pharo project}.
+\end{itemize}
+It is therefore meant more as a convenience class than a generic book class.
+In fact, SBAbook itself is pretty small; it relies heavily on the
+\hrefnote{https://www.ctan.org/pkg/memoir}{Memoir class} and on a selection of
+additional packages, which it parameterizes to implement a specific design, from
+page layout and typography to semantic markup.
+
+The result is a class that should work well for technical books and should still
+be pretty flexible, but which also has a few requirements and makes technical
+choices on its own.
+This document will thus only describe the specifics of SBAbook and its requirements.
+
+
+\tableofcontents*
+\mainmatter
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Technical requirements}
+
+
+\section{Motivations}
+
+Reasons (fonts, packages)
+
+
+\section{A pretty up-to-date TeXlive}
+
+how to update
+important packages
+
+
+\section{Building with Lua\LaTeX}
+
+how to run, latexmk
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Page layout and design}
+
+
+\section{Font choices}
+
+Open Sans for structural text
+Gentium for paragraphs
+Inconsolata for code, no syntax highlighting
+
+
+\section{Text layout}
+
+ragged right
+spaced paragraphs with no indent
+hanging section numbers
+
+
+\section{Custom semantic markup}
+
+chapterprecis
+constraints on content
+
+
+\section{Source code and listings}
+
+Source code relies on the well-known \code{listings} package, and sets it up
+both for mentions of source code elements inline in the text, and for code
+listings at the level of paragraphs or as floats.
+
+
+\paragraph{Inline source code}
+For short mentions of source code in the middle of the text, use the
+\code§\code|...|§ macro.
+This macro is an alias to \code§\lstinline§, which works like verbatim: it uses
+an arbitrary delimiter.
+Using this macro with curly braces like \code§\code{this}§ is possible, but this
+is an experimental feature of \code{listings}, and might break in some cases.
+
+
+\paragraph{Displayed source code}
+For multi-line excerpts of source code that should appear in the flow of the
+text, use the \code{listing} environment.
+This environment uses the \code{tcolorbox} package with \code{listings}; this
+provides the bracket-shaped decoration in the margin.
+
+\begin{listing}{[Visual]Basic}
+10 PRINT "Hello SBAbook!"
+20 PRINT "This is a paragraph-level listing."
+30 GOTO 10
+\end{listing}
+
+
+\paragraph{Referenceable listings}
+If you need to reference a source code listing, it needs to have label like the
+listing~\ref{lst:fooNewWith} below.
+
+\begin{listing}[%
+  title={Listing~\thetcbcounter~--- The constructor of class \code|Foo|},
+  label=lst:fooNewWith,
+  coltitle=black,
+  attach boxed title to top left={xshift=-2cm},
+  boxed title style={empty,colback=yellow},
+]{Smalltalk}
+Foo class>>with: parameter
+  ^ self new
+    initializeWith: parameter
+\end{listing}
+
+\paragraph{Floating listings}
+
+
+
+\section{Packages and conventions}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 \textlatin{\lipsum[3]}
 
 \end{document}

@@ -27,29 +27,23 @@
 %%% Fonts & paragraph typography
 %%%
 \RequirePackage{fontspec}
-\defaultfontfeatures[Gentium Basic]{
-  Extension = .ttf,
-  UprightFont = GenBkBasR,
-  ItalicFont = GenBkBasI,
-  BoldFont = GenBasB,
-  BoldItalicFont = GenBasBI,
-}
-\defaultfontfeatures[Inconsolata]{
-  UprightFont = *zi4-Regular,
-  BoldFont = *zi4-Bold,
-  StylisticSet = 3,
-}
-\defaultfontfeatures[Open Sans]{
-  Extension = .ttf,
-  UprightFont = OpenSans-Regular,
-  ItalicFont = OpenSans-Italic,
-  BoldFont = OpenSans-Bold,
-  BoldItalicFont = OpenSans-BoldItalic,
-}
 
-\setmainfont[Numbers=OldStyle]{Gentium Basic}
-\setsansfont[Scale=MatchLowercase,Numbers=OldStyle]{Open Sans}
-\setmonofont[Scale=MatchLowercase]{Inconsolata}
+\setmainfont[
+  Ligatures=TeX, % supposed to replace Mapping=tex-text
+  UprightFont = {Gentium Book Basic},
+  ItalicFont = {Gentium Book Basic Italic}
+]{Gentium Basic}
+\setsansfont[
+  Scale=MatchLowercase,
+  Ligatures=TeX,
+  Numbers=OldStyle
+]{Open Sans}
+\setmonofont[
+  Scale=MatchLowercase,
+  % StylisticSet = {1,3}, % documented but does not work
+  UprightFont = *zi4-Regular,
+  BoldFont = *zi4-Bold
+]{Inconsolata}
 
 \RequirePackage{microtype}
 

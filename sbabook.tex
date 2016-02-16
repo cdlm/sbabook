@@ -58,7 +58,7 @@
 
 \begin{document}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % Title page and colophon on verso
 \maketitle
 \pagestyle{titlingpage}
@@ -119,7 +119,7 @@
 \frontmatter
 \pagestyle{plain}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \chapter*{About this document}
 
 This document is both the showcase and documentation of the SBAbook document
@@ -149,7 +149,7 @@ This document will thus only describe the specifics of SBAbook and its requireme
 \mainmatter
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \chapter{Technical requirements}
 
 
@@ -169,15 +169,43 @@ important packages
 how to run, latexmk
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \chapter{Page layout and design}
 
 
 \section{Font choices}
 
-Open Sans for structural text
-Gentium for paragraphs
-Inconsolata for code, no syntax highlighting
+In technical writing, and especially using \LaTeX{}, it's tempting to try to use
+fonts as a semantic markup of sorts; unfortunately, this only results in a
+jumble of too many fonts and uselessly noisy paragraphs.
+Granted, a technical book can never be as minimal as a novel typeset in a single
+size, single weight roman font, but some restraint should help maintain a clear
+visual hierarchy.
+We've thus tried to keep to a minimal set of fonts with clearly defined roles.
+Luckily, there has been several impressive
+open-source fonts released in the last years, which made several combinations
+possible; in the end, we settled on the three families shown in
+Table~\ref{tab:fontRoles}.
+
+The workhorse font is \hrefnote{http://software.sil.org/gentium/}{Gentium}; it's
+compact, very legible, and not as cold as the fonts we usually see in \LaTeX{}
+documents.
+\hrefnote{https://www.google.com/fonts/specimen/Open+Sans}{Open Sans} is neutral
+but friendly and legible in small sizes; its minimal look makes it distinctive
+but not overpowering, making it perfect for captions, titles, and page
+decorations.
+
+\begin{table}[htb]%\centering
+  \begin{tabular}{ll}
+    \toprule
+    Gentium \emph{Italic}            & Primary, paragraph text \\
+    \textsf{Open Sans \textbf{Bold}} & Structural and secondary text: titles, captions \\
+    \texttt{Inconsolata}             & Verbatim text and code \\
+    \bottomrule
+  \end{tabular}
+  \caption{Fonts used in the document and their roles}% TODO align all captions the same
+  \label{tab:fontRoles}
+\end{table}
 
 
 \section{Text layout}
@@ -227,11 +255,11 @@ If you need to reference a source code listing, it needs to have label like the
 listing~\ref{lst:fooNewWith} below.
 
 \begin{listing}[%
-  title={Listing~\thetcbcounter~--- The constructor of class \code|Foo|},
+  title={\textbf{Listing~\thetcbcounter:} A factory method in class \code|Foo|},
   label=lst:fooNewWith,
   coltitle=black,
-  attach boxed title to top left={xshift=-2cm},
-  boxed title style={empty,colback=yellow},
+  attach boxed title to top left={xshift=-2cm},% FIXME
+  boxed title style={empty},
 ]{Smalltalk}
 Foo class>>with: parameter
   ^ self new
@@ -246,8 +274,8 @@ Foo class>>with: parameter
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \clearpage
-\textlatin{\lipsum[3]}
+\textlatin{\lipsum[2-7]}
 
 \end{document}

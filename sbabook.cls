@@ -288,7 +288,7 @@
 \RequirePackage{listings}
 
 \renewcommand{\lstlistlistingname}{Code examples}
-\lstset{
+\lstdefinestyle{sbabook}{
     inputencoding=utf8,
     aboveskip=0pt, belowskip=0pt,
     columns=fullflexible,
@@ -297,17 +297,17 @@
     showstringspaces=false,
     mathescape=false,
     tabsize=2,
-    basicstyle=\tiny\ttfamily\bfseries,
     keywordstyle={},
     stringstyle={},
     commentstyle={},
 }
+\lstset{style = sbabook}
 
 
 \lstdefinelanguage{plain}{}% verbatim, plain text
 
 % inline code
-\def\code{\lstinline[basicstyle=\ttfamily]}
+\let\code\lstinline
 
 \tcbset{
   sba/.style = {
@@ -348,21 +348,13 @@
   breakable, sba,
   %
   listing only,
-  listing options = { language = {#2} },
+  listing options = {
+    style = sbabook,
+    basicstyle = \small\ttfamily,
+    language = {#2}
+  },
   #1
 }
-
-% \lstnewenvironment{script}[2][defaultlabel]{%
-%     % \renewcommand{\lstlistingname}{Script}%
-%     \lstset{
-%         name={Script},
-%         caption={\emph{#2}},
-%         label={scr:#1},
-%         frame=tb,
-%         framerule=\heavyrulewidth,
-%         mathescape=false,
-%     }
-% }{}
 
 %% verbatim setup
 \bvtopandtail % \bvsides

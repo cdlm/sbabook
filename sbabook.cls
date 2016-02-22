@@ -40,7 +40,7 @@
 ]{Open Sans}
 \setmonofont[
   Scale=MatchLowercase,
-  % StylisticSet = {1,3}, % documented but does not work
+  StylisticSet = {1}, % straight quotes (3: shapely lowercase L, 2: unslashed zero)
   UprightFont = *zi4-Regular,
   BoldFont = *zi4-Bold
 ]{Inconsolata}

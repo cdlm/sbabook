@@ -7,6 +7,7 @@
 \checkandfixthelayout
 \typeoutlayout
 
+
 \usepackage[useregional]{datetime2}
 
 % extract info from git commit
@@ -198,9 +199,9 @@ decorations.
 \begin{table}[htb]
   \begin{tabular}{ll}
     \toprule
-    Gentium -- \textit{Italic}          & Primary, paragraph text \\
-    \textsf{Open Sans -- \textbf{Bold}} & Structural and secondary text: titles, captions \\
-    \texttt{Inconsolata}                & Verbatim text and code \\
+    \textnormal{Gentium -- \textit{Italic}} & Primary, paragraph text \\
+    \textsf{Open Sans -- \textbf{Bold}}     & Structural and secondary text: titles, captions \\
+    \texttt{Inconsolata}                    & Verbatim text and code \\
     \bottomrule
   \end{tabular}
   \caption{Fonts used in the document and their roles}% TODO align all captions the same
@@ -214,6 +215,12 @@ ragged right
 spaced paragraphs with no indent
 hanging section numbers
 
+\begin{figure}[tb]
+  \includegraphics{CreativeCommons-BY-SA}
+  \caption{A rather large representation of the icon for the Creative Commons
+    license we at Square Bracket Associates use for our books.}
+  \label{fig:cc-by-sa-icon}
+\end{figure}
 
 \section{Custom semantic markup}
 

@@ -267,6 +267,9 @@
 \captiontitlefont{\sffamily}
 \renewcommand\sidecapfloatwidth{.5\linewidth}% ahould adjust \sidecapwidth accordingly
 
+\setfloatadjustment{figure}{\small\sffamily\centering}
+\setfloatadjustment{table} {\small\sffamily\centering}
+
 %%%
 %%% Graphics
 %%%

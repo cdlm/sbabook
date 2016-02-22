@@ -266,6 +266,8 @@
 \captionnamefont{\sffamily\bfseries}
 \captiontitlefont{\sffamily}
 \renewcommand\sidecapfloatwidth{.5\linewidth}% ahould adjust \sidecapwidth accordingly
+\captionstyle[\RaggedRight]{\RaggedRight}
+\captiondelim{\quad}
 
 \setfloatadjustment{figure}{\small\sffamily\centering}
 \setfloatadjustment{table} {\small\sffamily\centering}
@@ -315,10 +317,9 @@
 \tcbset{
   sba/.style = {
     empty, size = minimal,
-    fonttitle=\sffamily,
-    colback = white,
-    frame style = {fill = none},
-    frame code = {\draw
+    blend before title code = {\begingroup\@contnfont ##1\@contdelim\endgroup},
+    fonttitle=\@conttfont,
+    interior code = {\draw
       ([xshift=-2pt]interior.south west)
       --([xshift=-4pt]interior.south west)
       --([xshift=-4pt]interior.north west)
@@ -345,8 +346,9 @@
 % main block-level listing, breakable across multiple pages, with a bracket in
 % the left margin
 \newtcblisting[
-    auto counter,
-    number within = chapter
+  blend into=listings,
+  auto counter,
+  number within = chapter
 ]{listing}[2][]{
   breakable, sba,
   %

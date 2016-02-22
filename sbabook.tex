@@ -204,7 +204,7 @@ decorations.
     \texttt{Inconsolata}                    & Verbatim text and code \\
     \bottomrule
   \end{tabular}
-  \caption{Fonts used in the document and their roles}% TODO align all captions the same
+  \caption{Fonts used in the document and their roles}
   \label{tab:fontRoles}
 \end{table}
 
@@ -262,11 +262,11 @@ If you need to reference a source code listing, it needs to have label like the
 listing~\ref{lst:fooNewWith} below.
 
 \begin{listing}[%
-  title={\textbf{Listing~\thetcbcounter:} A factory method in class \code|Foo|},
+  title={A factory method in class \code|Foo|},
   label=lst:fooNewWith,
   coltitle=black,
-  attach boxed title to top left={xshift=-2cm},% FIXME
-  boxed title style={empty},
+  % attach boxed title to top left={xshift=0pt},
+  % boxed title style={empty},
 ]{Smalltalk}
 Foo class>>with: parameter
   ^ self new

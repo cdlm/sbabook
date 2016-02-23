@@ -250,11 +250,11 @@ text, use the \code{listing} environment.
 This environment uses the \code{tcolorbox} package with \code{listings}; this
 provides the bracket-shaped decoration in the margin.
 
-\begin{listing}{[Visual]Basic}
+\begin{displaycode}{[Visual]Basic}
 10 PRINT "Hello SBAbook!"
 20 PRINT "This is a paragraph-level listing."
 30 GOTO 10
-\end{listing}
+\end{displaycode}
 
 
 \paragraph{Referenceable listings}
@@ -264,9 +264,6 @@ listing~\ref{lst:fooNewWith} below.
 \begin{listing}[%
   title={A factory method in class \code|Foo|},
   label=lst:fooNewWith,
-  coltitle=black,
-  % attach boxed title to top left={xshift=0pt},
-  % boxed title style={empty},
 ]{Smalltalk}
 Foo class>>with: parameter
   ^ self new

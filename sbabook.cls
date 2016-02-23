@@ -319,7 +319,15 @@
     empty, size = minimal,
     blend before title code = {\begingroup\@contnfont ##1\@contdelim\endgroup},
     fonttitle=\@conttfont,
-    interior code = {\draw
+    coltitle = black,
+    listing only,
+    listing options = {
+      style = sbabook,
+      basicstyle = \small\ttfamily,
+      language = {#1}
+    },
+    breakable,
+    frame code = {\draw
       ([xshift=-2pt]interior.south west)
       --([xshift=-4pt]interior.south west)
       --([xshift=-4pt]interior.north west)
@@ -339,25 +347,24 @@
     skin last is subskin of = {emptylast}{%
       frame code = {
         \draw[dashfade] ([xshift=-4pt]interior.north west) |- ([xshift=-2pt]interior.south west);
-      }},
-  }
+      }}
+  },
+  caption/.style = {title = {#1}}
 }
 
-% main block-level listing, breakable across multiple pages, with a bracket in
-% the left margin
+% Block-level listings, breakable across multiple pages, with a bracket in the
+% left margin
+\newtcblisting{displaycode}[2][]{
+  sba = {#2},
+  #1
+}
+
 \newtcblisting[
   blend into=listings,
   auto counter,
-  number within = chapter
+  % number within = chapter
 ]{listing}[2][]{
-  breakable, sba,
-  %
-  listing only,
-  listing options = {
-    style = sbabook,
-    basicstyle = \small\ttfamily,
-    language = {#2}
-  },
+  sba = {#2},
   #1
 }
 

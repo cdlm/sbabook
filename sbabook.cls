@@ -183,59 +183,6 @@
 
 
 %%%
-%%% Table of contents etc
-%%%
-\cftpagenumbersoff{part}
-\setlength{\cftbeforepartskip}{2em plus 1.5em minus .75em}
-
-\addtodef\tableofcontents{\clearforchapter}{}
-\renewcommand\cftpartfont{\sffamily\large\bfseries}
-\let\cftpartpagefont\cftpartfont% unused, but for coherence
-\renewcommand\cftpartleader{}
-\renewcommand\cftpartafterpnum{\cftparfillskip}
-\setlength{\cftbeforechapterskip}{1em plus .5em minus .2em}
-\renewcommand{\cftchapterbreak}{\pagebreak[2]}
-
-\renewcommand\cftchapterfont{\sffamily\bfseries}
-\let\cftchapterpagefont\cftchapterfont
-\renewcommand\precistocfont{\normalfont\sffamily\itshape\small}
-\renewcommand\precistocformat{% discourage hyphenation
-    \hyphenpenalty=5000
-    \tolerance=1000
-    \noindent\narrowragged}
-
-% TODO balance precis in TOC
-\renewcommand\cftsectionfont{\sffamily}
-\let\cftsectionpagefont\cftsectionfont
-\renewcommand\cftsubsectionfont{\sffamily\itshape}
-\let\cftsubsectionpagefont\cftsectionfont
-\cftsetindents{part}{0pt}{0em}
-\renewcommand{\cftpartpresnum}{\hspace{-4em}\hfill}
-\renewcommand{\cftpartaftersnum}{\quad}
-\cftsetindents{chapter}{0pt}{0em}
-\renewcommand{\cftchapterpresnum}{\hspace{-4em}\hfill}
-\renewcommand{\cftchapteraftersnum}{\quad}
-\cftsetindents{section}{0pt}{0em}
-\renewcommand{\cftsectionpresnum}{\hspace{-4em}\hfill}
-\renewcommand{\cftsectionaftersnum}{\quad}
-\cftsetindents{subsection}{0pt}{3em}
-\setrmarg{3.55em plus 1fil}% help avoid hyphenation
-
-%% figures & tables, like sections
-\let\cftfigurefont\cftsectionfont
-\let\cftfigurepagefont\cftfigurefont
-\cftsetindents{figure}{0pt}{0em}
-\renewcommand{\cftfigurepresnum}{\hspace{-4em}\hfill}
-\renewcommand{\cftfigureaftersnum}{\quad}
-\let\cfttablefont\cftsectionfont
-\let\cfttablepagefont\cfttablefont
-\cftsetindents{table}{0pt}{0em}
-\renewcommand{\cfttablepresnum}{\hspace{-4em}\hfill}
-\renewcommand{\cfttableaftersnum}{\quad}
-
-% merged list of figures/tables: \newlistofb ?
-
-%%%
 %%% Page styles & folios
 %%%
 \def\headfootfont{\small\sffamily}
@@ -292,7 +239,7 @@
 %%%
 \RequirePackage{listings}
 
-\renewcommand{\lstlistlistingname}{Code examples}
+% \renewcommand{\lstlistlistingname}{Code examples}
 \lstdefinestyle{sbabook}{
     inputencoding=utf8,
     aboveskip=0pt, belowskip=0pt,
@@ -318,6 +265,7 @@
   sba/.style = {
     empty, size = minimal,
     blend before title code = {\begingroup\@contnfont ##1\@contdelim\endgroup},
+    floatplacement = tb,
     fonttitle=\@conttfont,
     coltitle = black,
     listing only,
@@ -353,20 +301,81 @@
 
 % Block-level listings, breakable across multiple pages, with a bracket in the
 % left margin
-\newtcblisting{displaycode}[2][]{
-  sba = {#2},
-  #1
-}
+\newtcblisting{displaycode}[2][]{sba={#2}, #1}
 
 \newtcblisting[
-  blend into=listings,
-  auto counter,
-  % number within = chapter
-]{listing}[3][]{
-  sba = {#2},
-  title = {#3},
-  #1
-}
+  % nearly identical to what "blend into=figures" would do
+  use counter* = figure,
+  list inside=lof,
+  list type=listing,
+  /tcb/code={\appto\tcb@new@colopt{,before title={\tcb@blend@beforetitle{\lstlistingname~\thefigure}}}}
+  % crefname={listing}{listings},
+  % Crefname={Listing}{Listings}
+]{listing}[3][]{sba={#2}, title={#3}, #1}
+
+%%%
+%%% Table of contents appearance
+%%%
+\cftpagenumbersoff{part}
+\setlength{\cftbeforepartskip}{2em plus 1.5em minus .75em}
+
+\addtodef\tableofcontents{\clearforchapter}{}
+\renewcommand\cftpartfont{\sffamily\large\bfseries}
+\let\cftpartpagefont\cftpartfont% unused, but for coherence
+\renewcommand\cftpartleader{}
+\renewcommand\cftpartafterpnum{\cftparfillskip}
+\setlength{\cftbeforechapterskip}{1em plus .5em minus .2em}
+\renewcommand{\cftchapterbreak}{\pagebreak[2]}
+
+\renewcommand\cftchapterfont{\sffamily\bfseries}
+\let\cftchapterpagefont\cftchapterfont
+\renewcommand\precistocfont{\normalfont\sffamily\itshape\small}
+\renewcommand\precistocformat{% discourage hyphenation
+    \hyphenpenalty=5000
+    \tolerance=1000
+    \noindent\narrowragged}
+
+% TODO balance precis in TOC
+\renewcommand\cftsectionfont{\sffamily}
+\let\cftsectionpagefont\cftsectionfont
+\renewcommand\cftsubsectionfont{\sffamily\itshape}
+\let\cftsubsectionpagefont\cftsectionfont
+\cftsetindents{part}{0pt}{0em}
+\renewcommand{\cftpartpresnum}{\hspace{-4em}\hfill}
+\renewcommand{\cftpartaftersnum}{\quad}
+\cftsetindents{chapter}{0pt}{0em}
+\renewcommand{\cftchapterpresnum}{\hspace{-4em}\hfill}
+\renewcommand{\cftchapteraftersnum}{\quad}
+\cftsetindents{section}{0pt}{0em}
+\renewcommand{\cftsectionpresnum}{\hspace{-4em}\hfill}
+\renewcommand{\cftsectionaftersnum}{\quad}
+\cftsetindents{subsection}{0pt}{3em}
+\setrmarg{3.55em plus 1fil}% help avoid hyphenation
+
+%% Combine figures, tables, listings into a single list. We redirect everything
+%% to the list of figures
+\renewcommand\listfigurename{Figures, Tables, and Listings}
+\renewcommand\ext@table{lof}
+
+%% figures & tables, like sections
+\cftsetindents{figure}{0pt}{0em}
+\let\cftfigurefont\cftsectionfont
+\let\cftfigurepagefont\cftfigurefont
+\renewcommand\cftfigurepresnum{\hspace{-4em}\hfill}
+\renewcommand\cftfigureaftersnum{\quad}
+
+\let\c@table\c@figure
+\let\l@table\l@figure
+
+% redefining the counter it taken care of by \newtcblisting
+% \let\c@listing\c@figure
+\let\l@listing\l@figure
+
+%% counter appearance is reset at front/main/back matter
+\renewcommand\@memmain@floats{%
+  \counterwithin{figure}{chapter}
+  \renewcommand\thefigure{\thechapter\cdot\Alph{figure}}
+  \let\thetable\thefigure}
 
 %% verbatim setup
 \bvtopandtail % \bvsides

@@ -236,9 +236,8 @@ constraints on content
 
 \section{Source code and listings}
 
-Source code relies on the well-known \code{listings} package, and sets it up
-both for mentions of source code elements inline in the text, and for code
-listings at the level of paragraphs or as floats.
+SBAbook provides custom high-level semantic markup for source code, which
+relies on the powerful \code{listings} and \code{tcolorbox} packages.
 
 
 \paragraph{Inline source code}
@@ -252,9 +251,9 @@ is an experimental feature of \code{listings}, and might break in some cases.
 
 \paragraph{Displayed source code}
 For multi-line excerpts of source code that should appear in the flow of the
-text, use the \code{listing} environment.
-This environment uses the \code{tcolorbox} package with \code{listings}; this
-provides the bracket-shaped decoration in the margin.
+text, use the \code{displaycode} environment.
+You have to specify the language each excerpt of code is written in, as an
+argument; any language known to the \code{listings} package works.
 
 \begin{displaycode}{[Visual]Basic}
 10 PRINT "Hello SBAbook!"
@@ -263,21 +262,29 @@ provides the bracket-shaped decoration in the margin.
 \end{displaycode}
 
 
-\paragraph{Referenceable listings}
-If you need to reference a source code listing, it needs to have label like the
+\paragraph{Referenced listings}
+If you need a numbered source code listing that is referenced in the table of
+contents, use the \code{listing} environment, providing a descriptive caption as
+a second mandatory argument.
+To reference that listing from the text, the label must be provided as
+\code{label=something} in the optional argument, as in
 listing~\ref{lst:fooNewWith} below.
+Similarly, use the \code{list text} option from \code{tcolorbox} if the caption
+should be worded differently in the table of contents.
 
-\begin{listing}[%
-  title={A factory method in class \code|Foo|},
-  label=lst:fooNewWith,
-]{Smalltalk}
+\begin{listing}[label=lst:fooNewWith]{Smalltalk}
+{A factory method in class \code|Foo|}
 Foo class>>with: parameter
   ^ self new
     initializeWith: parameter
 \end{listing}
 
-\paragraph{Floating listings}
 
+\paragraph{Floating listings}
+To make a floating listing, simply add the \code{float} option in the
+environment's optional parameter.
+In case you really need to specify the placement, the usual specifiers can also
+be passed: \code{float=htbp}.
 
 
 \section{Packages and conventions}

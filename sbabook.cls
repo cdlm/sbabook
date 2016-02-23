@@ -348,8 +348,7 @@
       frame code = {
         \draw[dashfade] ([xshift=-4pt]interior.north west) |- ([xshift=-2pt]interior.south west);
       }}
-  },
-  caption/.style = {title = {#1}}
+  }
 }
 
 % Block-level listings, breakable across multiple pages, with a bracket in the
@@ -363,8 +362,9 @@
   blend into=listings,
   auto counter,
   % number within = chapter
-]{listing}[2][]{
+]{listing}[3][]{
   sba = {#2},
+  title = {#3},
   #1
 }
 

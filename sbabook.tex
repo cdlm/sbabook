@@ -147,6 +147,12 @@ This document will thus only describe the specifics of SBAbook and its requireme
 
 
 \tableofcontents*
+
+\clearpage
+\listoffigures
+\listoftables
+\lstlistoflistings
+
 \mainmatter
 
 
@@ -197,6 +203,7 @@ but not overpowering, making it perfect for captions, titles, and page
 decorations.
 
 \begin{table}[htb]
+  \caption{Fonts used in the document, and their roles}
   \begin{tabular}{ll}
     \toprule
     \textnormal{Gentium -- \textit{Italic}} & Primary, paragraph text \\
@@ -204,7 +211,6 @@ decorations.
     \texttt{Inconsolata}                    & Verbatim text and code \\
     \bottomrule
   \end{tabular}
-  \caption{Fonts used in the document and their roles}
   \label{tab:fontRoles}
 \end{table}
 
@@ -216,9 +222,9 @@ spaced paragraphs with no indent
 hanging section numbers
 
 \begin{figure}[tb]
-  \includegraphics{CreativeCommons-BY-SA}
   \caption{A rather large representation of the icon for the Creative Commons
     license we at Square Bracket Associates use for our books.}
+  \includegraphics{CreativeCommons-BY-SA}
   \label{fig:cc-by-sa-icon}
 \end{figure}
 

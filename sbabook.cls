@@ -304,14 +304,19 @@
 \newtcblisting{displaycode}[2][]{sba={#2}, #1}
 
 \newtcblisting[
-  % nearly identical to what "blend into=figures" would do
+  % nearly identical to what "blend into=figures" would do, except for /tcb/code
   use counter* = figure,
-  list inside=lof,
-  list type=listing,
-  /tcb/code={\appto\tcb@new@colopt{,before title={\tcb@blend@beforetitle{\lstlistingname~\thefigure}}}}
+  list inside = lof,
+  list type = listing,
+  /tcb/code = {\appto\tcb@new@colopt{,before title={\tcb@blend@beforetitle{\lstlistingname~\thefigure}}}}
   % crefname={listing}{listings},
   % Crefname={Listing}{Listings}
-]{listing}[3][]{sba={#2}, title={#3}, #1}
+]{listing}[3][]{
+  sba={#2},
+  title={#3},
+  list entry = {\protect\numberline{\thefigure}{\ignorespaces #3}},
+  #1
+}
 
 %%%
 %%% Table of contents appearance
@@ -354,7 +359,7 @@
 
 %% Combine figures, tables, listings into a single list. We redirect everything
 %% to the list of figures
-\renewcommand\listfigurename{Figures, Tables, and Listings}
+\renewcommand\listfigurename{Illustrations}
 \renewcommand\ext@table{lof}
 
 %% figures & tables, like sections
@@ -374,7 +379,7 @@
 %% counter appearance is reset at front/main/back matter
 \renewcommand\@memmain@floats{%
   \counterwithin{figure}{chapter}
-  \renewcommand\thefigure{\thechapter\cdot\Alph{figure}}
+  \renewcommand\thefigure{\thechapter-\arabic{figure}}
   \let\thetable\thefigure}
 
 %% verbatim setup

@@ -314,6 +314,7 @@
 ]{listing}[3][]{
   sba={#2},
   title={#3},
+  bottomtitle = 1ex,
   list entry = {\protect\numberline{\thefigure}{\ignorespaces #3}},
   #1
 }

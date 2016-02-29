@@ -311,11 +311,12 @@
   /tcb/code = {\appto\tcb@new@colopt{,before title={\tcb@blend@beforetitle{\lstlistingname~\thefigure}}}}
   % crefname={listing}{listings},
   % Crefname={Listing}{Listings}
-]{listing}[3][]{
+]{listing}[4][]{
   sba={#2},
-  title={#3},
+  label=#3,
+  title={#4},
   bottomtitle = 1ex,
-  list entry = {\protect\numberline{\thefigure}{\ignorespaces #3}},
+  list entry = {\protect\numberline{\thefigure}{\ignorespaces #4}},
   #1
 }
 

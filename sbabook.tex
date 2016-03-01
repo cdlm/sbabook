@@ -207,7 +207,7 @@ but friendly and legible in small sizes; its minimal look makes it distinctive
 but not overpowering, making it perfect for captions, titles, and page
 decorations.
 
-\begin{table}[htb]
+\begin{table}
   \caption{Fonts used in the document, and their roles}
   \begin{tabular}{ll}
     \toprule
@@ -244,8 +244,27 @@ For short mentions of source code in the middle of the text, use the
 \code§\code|...|§ macro.
 This macro is an alias to \code§\lstinline§, which works like verbatim: it uses
 an arbitrary delimiter.
+
 Using this macro with curly braces like \code§\code{this}§ is possible, but this
-is an experimental feature of \code{listings}, and might break in some cases.
+is an experimental feature of \code{listings}, and it breaks in some cases; it's
+fine when used in paragraph text, but things get weird as soon as it's part of
+the argument of some other macro.
+Table~\ref{tab:codeDelims} lists a few characters in the ASCII range that are
+convenient as delimiters.
+
+\begin{table}\label{tab:codeDelims}
+  \caption{Some convenient delimiters for inline code}
+  \begin{tabular}{ll@{\qquad}ll}
+    \toprule
+    \code_\code|...|_ & pipe                      & \code¶\code§...§¶ & section sign \\
+    \code|\code_..._| & underscore                & \code§\code¶...¶§ & pilcrow      \\
+    \code¡\code!...!¡ & exclamation point         & \code~\code$...$~ & dollar sign  \\
+    \code!\code¡...¡! & inverse exclamation point & \code$\code~...~$ & tilde        \\
+    \code¿\code?...?¿ & question mark             & \code`\code^...^` & circumflex   \\
+    \code?\code¿...¿? & inverse question mark     & \code^\code`...`^ & backquote    \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 
 \paragraph{Displayed source code}

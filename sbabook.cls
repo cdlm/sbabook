@@ -44,6 +44,8 @@
   UprightFont = *zi4-Regular,
   BoldFont = *zi4-Bold
 ]{Inconsolata}
+\let\codefamily\ttfamily
+\let\textcode\texttt
 
 \RequirePackage{microtype}
 
@@ -271,7 +273,7 @@
     listing only,
     listing options = {
       style = sbabook,
-      basicstyle = \small\ttfamily,
+      basicstyle = \small\codefamily,
       language = {#1}
     },
     breakable,
@@ -388,7 +390,7 @@
 \bvtopandtail % \bvsides
 \setlength{\bvboxsep}{.25em}
 \tabson[4]
-\setverbatimfont{\normalfont\ttfamily\small}
+\setverbatimfont{\normalfont\codefamily\small}
 
 \DeclareRobustCommand{\LaTeX}{%
   {% copied from Grzegorz Murzynowski's article in TUGboat 29(1)

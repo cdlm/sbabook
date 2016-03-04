@@ -53,9 +53,9 @@
     Author = {\theauthor},
     Keywords = {LaTeX, document class, book, typography}}}
 
-\newcommand\hrefnote[2]{% inline linked text, plus URL in footnote
-  % #1: URL, #2: link text
-  \href{#1}{#2}\footnote{\url{#1}}}
+\newcommand\hrefnote[3][]{% inline linked text, plus URL in footnote
+  % \hrefnote[]{URL}{link text}
+  \href{#2}{#3}\footnote{\url{#2} #1}}
 
 % a nice horizontal separator
 \newcommand{\sectionline}{%
@@ -200,18 +200,20 @@ Granted, a technical book can never be as minimal as a novel typeset in a single
 size, single weight roman font, but some restraint should help maintain a clear
 visual hierarchy.
 We've thus tried to keep to a minimal set of fonts with clearly defined roles.
-Luckily, there has been several impressive
-open-source fonts released in the last years, which made several combinations
-possible; in the end, we settled on the three families shown in
-Table~\ref{tab:fontRoles}.
+Thankfully, there has been several impressive open-source fonts released in the
+last years, which made several combinations possible; in the end, we settled on
+three families in Table~\ref{tab:fontRoles}, which are all packaged in the
+\TeX{}live distribution.
 
-The workhorse font is \hrefnote{http://software.sil.org/gentium/}{Gentium}; it's
-compact, very legible, and not as cold as the fonts we usually see in \LaTeX{}
-documents.
-\hrefnote{https://www.google.com/fonts/specimen/Open+Sans}{Open Sans} is neutral
-but friendly and legible in small sizes; its minimal look makes it distinctive
-but not overpowering, making it perfect for captions, titles, and page
-decorations.
+The workhorse font is \hrefnote[--- SIL Open Font
+License]{http://software.sil.org/gentium/}{Gentium}; it's compact, very legible,
+and not as cold as the fonts we usually see in \LaTeX{} documents.
+In titles, \hrefnote[--- Apache
+License]{https://www.google.com/fonts/specimen/Open+Sans}{Open Sans} gives a
+neutral but friendly impression; it is not overpowering and is very legible in
+small sizes, making it perfect for captions and page decorations.
+Finally, the font for source code excerpts and verbatim text is \hrefnote[---
+SIL Open Font License]{https://mozilla.github.io/Fira/}{Fira Mono}.
 
 \begin{table}
   \caption{Fonts used in the document, and their roles}
@@ -219,7 +221,7 @@ decorations.
     \toprule
     \textnormal{Gentium -- \textit{Italic}} & Primary, paragraph text \\
     \textsf{Open Sans -- \textbf{Bold}}     & Structural and secondary text: titles, captions \\
-    \texttt{Inconsolata}                    & Verbatim text and code \\
+    \texttt{Fira Mono}                      & Verbatim text and code \\
     \bottomrule
   \end{tabular}
   \label{tab:fontRoles}

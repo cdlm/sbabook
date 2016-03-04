@@ -40,7 +40,7 @@
 ]{Open Sans}
 \setmonofont[
   Scale=MatchLowercase
-]{Hack}%{Fira Mono}
+]{Fira Mono}%{Hack}
 \let\codefamily\ttfamily
 \let\textcode\texttt
 

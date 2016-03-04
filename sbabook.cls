@@ -244,6 +244,7 @@
     aboveskip=0pt, belowskip=0pt,
     columns=fullflexible,
     breaklines=true,
+    keepspaces=true,
     breakatwhitespace=true,
     showstringspaces=false,
     mathescape=false,

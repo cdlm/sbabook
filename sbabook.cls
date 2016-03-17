@@ -44,8 +44,6 @@
 \let\codefamily\ttfamily
 \let\textcode\texttt
 
-\RequirePackage{microtype}
-
 \noindentafterchapter
 \setlength{\parindent}{1.5em}
 \nonzeroparskip

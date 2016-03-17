@@ -66,7 +66,7 @@
 \sideparmargin{outer}
 \renewcommand\sideparfont{\footnotesize\sffamily}
 \renewcommand\sideparform{\ifmemtortm\RaggedRight\else\RaggedLeft\fi}
-% \setmpjustification{\RaggedLeft}{\Raggedright} % this is for margin floats
+% \setmpjustification{\RaggedLeft}{\RaggedRight} % this is for margin floats
 
 %%%
 %%% Title page

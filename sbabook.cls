@@ -35,6 +35,7 @@
 ]{Gentium Basic}
 \setsansfont[
   Scale=MatchLowercase,
+  BoldFont = {* Bold},
   Ligatures=TeX,
   Numbers=OldStyle
 ]{Open Sans}

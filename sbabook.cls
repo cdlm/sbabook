@@ -48,7 +48,11 @@
 \noindentafterchapter
 \setlength{\parindent}{1.5em}
 \nonzeroparskip
+
 \firmlists
+\renewcommand*{\descriptionlabel}[1]{%
+  \hspace\labelsep
+  \normalfont\sffamily #1}
 
 \RequirePackage{ragged2e}
 \RaggedRight

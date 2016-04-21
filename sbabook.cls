@@ -71,6 +71,11 @@
 \renewcommand\sideparform{\ifmemtortm\RaggedRight\else\RaggedLeft\fi}
 % \setmpjustification{\RaggedLeft}{\RaggedRight} % this is for margin floats
 
+% footnotes at bottom of page instead of below text (which is ragged bottom)
+% also moves footnotes below bottom-of-page floats
+\RequirePackage[bottom]{footmisc}
+
+
 %%%
 %%% Title page
 %%%

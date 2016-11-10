@@ -42,6 +42,11 @@ Just get a full install of the latest [TeXlive release][tl] and you should be go
 Fonts: the class uses [Gentium Book Basic][gentium], [Open Sans][], and [Fira mono][fira].
 Those are now distributed as part of TeXlive.
 
+On Linux distributions that maintain their own packaging instead of using the system provided by TeXlive, you will probably need to install several packages; e.g. on Ubuntu 15.04, since `texlive-full` doesn't seem to be a full install, you will additionally need:
+- `texlive-luatex`, for `luaotfload.sty`,
+- `texlive-xetex`, for `xunicode.sty`,
+- `texlive-generic-extra`, for `tracklang.sty`,
+- `texlive-fonts-extra`, for the Gentium fonts…
 
 [memoir]: http://www.ctan.org/pkg/memoir
 [sba]: https://github.com/SquareBracketAssociates

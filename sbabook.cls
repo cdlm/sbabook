@@ -43,7 +43,7 @@
   Scale=MatchLowercase
 ]{Fira Mono}%{Hack}
 \let\codefamily\ttfamily
-\let\textcode\texttt
+\newcommand\textcode[1]{\texttt{#1}}
 
 \noindentafterchapter
 \setlength{\parindent}{1.5em}

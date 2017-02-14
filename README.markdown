@@ -2,7 +2,7 @@ SBAbook — A LaTeX class for technical books
 ===========================================
 
 This is a set of layout, typography, and markup definitions for LaTeX books based on the [memoir][] document class.
-It is intended for use by [Square Bracket Associates][sba], and heavily customized in this direction — by this I mean it's made to setup specific semantic markup and typographic style, rather than to be flexible.
+It is intended for use by [Square Bracket Associates (SBA)][sba], and heavily customized in this direction — by this I mean it's made to setup specific semantic markup and typographic style, rather than to be flexible.
 
 [![Build Status](https://travis-ci.org/cdlm/kata-uno.svg?branch=master)](https://travis-ci.org/cdlm/kata-uno)
 [![Flattr this git repo](https://button.flattr.com/flattr-badge-large.png)](https://flattr.com/submit/auto?url=https%3A%2F%2Fgithub.com%2Fcdlm%2Fsbabook)
@@ -28,6 +28,7 @@ The class requires LuaLaTeX to load nice fonts; just use `lualatex` instead of `
 ## Showcase
 
 It looks nice, I promise!
+Check the [manual / example file](https://github.com/cdlm/sbabook/blob/master/sbabook.tex); a compiled version is attached to the [latest release](https://github.com/cdlm/sbabook/releases/latest/).
 
 
 ## Install

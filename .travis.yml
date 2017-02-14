@@ -15,4 +15,4 @@ deploy:
   skip_cleanup: true
   file: sbabook.pdf
   on:
-    repo: cdlm/sbabook
+    tags: true

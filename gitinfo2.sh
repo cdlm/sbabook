@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Extract version info for use by the gitinfo2.sty package.
 #

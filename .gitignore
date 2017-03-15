@@ -9,4 +9,4 @@
 *.toc
 .auctex/
 /auto/
-sbabook.pdf
+sbabook*.pdf

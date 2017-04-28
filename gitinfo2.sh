@@ -12,8 +12,19 @@ set -o errtrace  # trace ERR through 'time command' and other functions
 set -o nounset   # set -u : exit the script if you try to use an uninitialized variable
 set -o errexit   # set -e : exit the script if any statement returns a non-true return value
 
-# Check that we're in a git repo, or bail out
-git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
+function die() {
+    status="$1"; shift
+    echo "$0: ${*:-Error extracting version info}" >&2
+    exit "$status"
+}
+
+function silently() {
+    "$@" > /dev/null 2>&1
+}
+
+# Check that we're in a git repo with a proper HEAD commit, or bail out
+silently git rev-parse --is-inside-work-tree || die 0 "Not in a git repo"
+silently git rev-parse --verify HEAD || die 0 "No parent commit available"
 
 # Get the first tag found in the history from the current HEAD
 FIRSTTAG=$(git describe --tags --always --dirty='-*' 2>/dev/null)

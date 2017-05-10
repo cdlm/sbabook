@@ -40,28 +40,26 @@
       color(75)=(PharoRed);
       color(100)=(PharoRed)}
 
-    \node[
-      scale=2.5,
-      text width=.5\pagewidth-4cm,
-      align=flush right
-      ] at (center) {
-        \HUGE\sffamily\bfseries\color{white} \@title
+    \node[anchor=north east] at ($ (horizon -| right) + (-.1\pagewidth,-2cm) $) {
+        \begin{varwidth}{.8\pagewidth}
+          \flushright \fontsize{50pt}{60pt}\sffamily\bfseries\color{white}
+          \@title
+        \end{varwidth}
       };
 
-    \node[
-      text width=\pagewidth-5cm,
-      align=flush right
-      ] at ([above=1cm]depths) {
-        \HUGE\sffamily\color{white}
-        \begin{tabular}[t]{r@{}} \@author \end{tabular}
+    \node[anchor=south east] at ($ (depths -| right) + (-.1\pagewidth,1cm) $) {
+        \begin{varwidth}{.8\pagewidth}
+          \flushright \HUGE\sffamily\color{white}
+          \@author
+        \end{varwidth}
       };
 
-      \node[
-        text width=\pagewidth-5cm,
-        align=flush right
-        ] at ([below=1cm]depths) {
-          \huge\sffamily\color{white} \@date
-        };
+      \node[anchor=north east] at ($ (depths -| right) + (-.1\pagewidth,-1cm) $) {
+        \begin{varwidth}{.8\pagewidth}
+          \flushright \huge\sffamily\color{white}
+          \@date
+        \end{varwidth}
+      };
 
     \begin{pgfonlayer}{background}
       \fill[LightShade] (top -| left) rectangle (bottom -| right);

@@ -1,6 +1,10 @@
 \ProvidesFile{pharo-titlepage.sty}
   [2017/05/10 0.1 title page design for SBA booklets]
 
+\DeclareOption{maketitle}{%
+  \renewcommand{\maketitle}{\pharotitle}}
+\ProcessOptions
+
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
 \usetikzlibrary{calc}

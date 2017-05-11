@@ -95,6 +95,11 @@
 %%%
 %%% Title page
 %%%
+
+% similar to \title, \author, \date from latex.ltx
+\def\series#1{\gdef\@series{#1}}
+\let\@series\@empty
+
 \setlength\droptitle{5cm}
 \pretitle{\begin{flushright}\HUGE\sffamily}
 \posttitle{\par\end{flushright}\vskip 1cm}

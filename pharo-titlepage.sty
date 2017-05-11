@@ -83,9 +83,10 @@
         \end{varwidth}
       };
 
-      \node[anchor=north east] at ($ (depths -| right) + (-.1\pagewidth,-1cm) $) {
+      \node[anchor=north east] at ($ (depths -| right) + (-.1\pagewidth,-.5cm) $) {
         \begin{varwidth}{.8\pagewidth}
           \flushright \huge\sffamily\color{PharoDarkBlue!50!PharoBlue!50!LightShade}
+          \ifx\@empty\@series\else\@series\titlebreak\fi
           \@date
         \end{varwidth}
       };

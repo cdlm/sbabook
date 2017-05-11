@@ -12,7 +12,8 @@
 %%%
 %%% Page layout
 %%%
-\newcommand{\stockustrade}{\setstocksize{9in}{6in}}
+\newcommand{\stockustrade}{\setstocksize{9in}{6in}}% Lulu final book proportions
+\newcommand{\stockaivus}{\setstocksize{11in}{210mm}}% intersection of A4 and US Letter
 \newcommand{\setbleed}[1]{%
     \settrimmedsize{\stockheight}{\stockwidth}{*}%
     \settrims{#1}{#1}%
@@ -25,10 +26,10 @@
   \setlrmarginsandblock{.85in}{.65in}{*}
   \setulmarginsandblock{.75in}{.75in}{*}}
 \newcommand{\spiralboundpage}{
-  \setstocksize{11in}{210mm}% hybrid between A4 and US Letter
+  \stockaivus
   \setbleed{.125in}
-  \setlrmarginsandblock{1.5in}{1in}{*}
-  \setulmarginsandblock{1in}{1in}{*}}
+  \setlrmarginsandblock{1.25in}{1.25in}{*}
+  \setulmarginsandblock{.75in}{1in}{*}}
 \newcommand{\pagelayout}[1]{
   \providecommand{\setuppage}{#1}% set default page layout
   \setuppage\checkandfixthelayout

@@ -27,7 +27,7 @@
   \setulmarginsandblock{.75in}{.75in}{*}}
 \newcommand{\spiralboundpage}{
   \stockaivus
-  \setbleed{.125in}
+  \setbleed{0pt}% trims not required (unless we deliver this via Lulu as well?)
   \setlrmarginsandblock{1.25in}{1.25in}{*}
   \setulmarginsandblock{.75in}{1in}{*}}
 \newcommand{\pagelayout}[1]{

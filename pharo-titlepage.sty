@@ -54,6 +54,9 @@
     \coordinate (center) at (current page.center);
     \coordinate (bottom) at (current page.south);
 
+    \coordinate (stocktopleft) at ([left=\trimedge,above=\trimtop]current page.north west);
+    \coordinate (stockbottomright) at ([right=\stockwidth,below=\stockheight]stocktopleft);
+
     \coordinate (horizon) at ($ (top)!.618!(center) $);
     \coordinate (depths) at ($ (center)!.618!(bottom) $);
 
@@ -82,15 +85,15 @@
 
       \node[anchor=north east] at ($ (depths -| right) + (-.1\pagewidth,-1cm) $) {
         \begin{varwidth}{.8\pagewidth}
-          \flushright \huge\sffamily\color{white}
+          \flushright \huge\sffamily\color{PharoDarkBlue!50!PharoBlue!50!LightShade}
           \@date
         \end{varwidth}
       };
 
     \begin{pgfonlayer}{background}
-      \fill[LightShade] (top -| left) rectangle (bottom -| right);
-      \fill[PharoBlue] (left |- horizon) rectangle (right |- depths);
-      \fill[PharoDarkBlue] (left |- depths) rectangle (right |- bottom);
+      \fill[LightShade] (stocktopleft) rectangle (horizon -| stockbottomright);
+      \fill[PharoBlue] (horizon -| stocktopleft) rectangle (depths -| stockbottomright);
+      \fill[PharoDarkBlue] (depths -| stocktopleft) rectangle (stockbottomright);
 
       \begin{scope}[
         transform canvas={shift=(beacon)},

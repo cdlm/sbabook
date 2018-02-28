@@ -7,6 +7,7 @@
 *.lol
 *.lot
 *.toc
+*.listing
 .auctex/
 /auto/
 sbabook*.pdf

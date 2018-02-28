@@ -8,6 +8,7 @@
 *.lot
 *.toc
 *.listing
+*.synctex.gz
 .auctex/
 /auto/
 sbabook*.pdf

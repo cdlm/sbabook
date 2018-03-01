@@ -1,8 +1,13 @@
 \ProvidesFile{pharo-titlepage.sty}
   [2017/05/10 0.1 title page design for SBA booklets]
 
+% default titlepage appearance
+\newcommand\pharotitle@maketitle{\horizontitle}
+
 \DeclareOption{maketitle}{%
-  \renewcommand{\maketitle}{\pharotitle}}
+  \renewcommand{\maketitle}{\pharotitle@maketitle}}
+\DeclareOption{horizon}{%
+  \renewcommand\pharotitle@maketitle{\horizontitle}}
 \ProcessOptions
 
 \RequirePackage{xcolor}
@@ -44,7 +49,7 @@
 \pgfdeclarelayer{background}
 \pgfsetlayers{background,main}
 
-\newcommand\pharotitle{
+\newcommand\horizontitle{
   \thispagestyle{empty}
 
   \begin{tikzpicture}[remember picture,overlay,line width=0mm]

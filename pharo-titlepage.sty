@@ -6,6 +6,8 @@
 
 \DeclareOption{maketitle}{%
   \renewcommand{\maketitle}{\pharotitle@maketitle}}
+\DeclareOption{foggy}{%
+  \renewcommand\pharotitle@maketitle{\foggytitle}}
 \DeclareOption{horizon}{%
   \renewcommand\pharotitle@maketitle{\horizontitle}}
 \ProcessOptions
@@ -45,6 +47,11 @@
 \definecolor{BeaconRed}{HTML}{ED1C24}
 
 \definecolor{LightShade}{HTML}{EEEEEE}
+\definecolor{Shade}{HTML}{88AACC}
+
+\colorlet{top}{LightShade}
+\colorlet{mid}{LightShade}
+\colorlet{bot}{PharoBlue}
 
 \pgfdeclarelayer{background}
 \pgfsetlayers{background,main}
@@ -113,7 +120,72 @@
   \newpage
 }
 
-\newcommand\pharobeacon@tikz{
+\newcommand\foggytitle{
+  \thispagestyle{empty}
+
+  \begin{tikzpicture}[remember picture,overlay,line width=0mm]
+    \coordinate (left) at (current page.west);
+    \coordinate (right) at (current page.east);
+    \coordinate (top) at (current page.north);
+    \coordinate (center) at (current page.center);
+    \coordinate (bottom) at (current page.south);
+
+    \coordinate (stocktopleft) at ([left=\trimedge,above=\trimtop]current page.north west);
+    \coordinate (stockbottomright) at ([right=\stockwidth,below=\stockheight]stocktopleft);
+
+    \coordinate (horizon) at ($ (top)!.618!(center) $);
+    \coordinate (depths) at ($ (center)!.618!(bottom) $);
+
+    \newcommand\beaconscaling{(.618\paperheight/120pt)} % golden ratio factor & approx. height of beacon tower
+    \coordinate (beacon) at ($ (depths -| left) + (-10.1,-2.5) $);
+
+    \node[anchor=north east] at ($ (horizon -| right) + (-.1\pagewidth,-2cm) $) {
+        \begin{varwidth}{.8\pagewidth}
+          \flushright \fontsize{50pt}{60pt}\sffamily\bfseries\color{white}
+          \@title
+        \end{varwidth}
+      };
+
+    \node[anchor=south east] at ($ (depths -| right) + (-.1\pagewidth,1cm) $) {
+        \begin{varwidth}{.8\pagewidth}
+          \flushright \HUGE\sffamily\color{white}
+          \@author
+        \end{varwidth}
+      };
+
+      \node[anchor=north east] at ($ (depths -| right) + (-.1\pagewidth,-.5cm) $) {
+        \begin{varwidth}{.8\pagewidth}
+          \flushright \huge\sffamily\color{PharoDarkBlue!50!PharoBlue!50!LightShade}
+          \ifx\@empty\@series\else\@series\titlebreak\fi
+          \@date
+        \end{varwidth}
+      };
+
+    \begin{pgfonlayer}{background}
+      \shade[bottom color=LightShade, top color=Shade] (stocktopleft) rectangle (depths -| stockbottomright);
+      % \fill[mid] (horizon -| stocktopleft) rectangle (depths -| stockbottomright);
+      \shade[bottom color=bot, top color=LightShade] (depths -| stocktopleft) rectangle (stockbottomright);
+
+      \begin{scope}[
+        transform canvas={shift=(beacon)},
+        scale=\beaconscaling]
+
+        \pharobeacon@tikz[bot]
+
+      \end{scope}
+    \end{pgfonlayer}
+  \end{tikzpicture}
+  \newpage
+}
+
+\newcommand\pharobeacon@tikz[1][PharoBlue]{
+  % vertical gradient along tower
+  \pgfdeclareverticalshading{column}{100bp}{
+    color(0)=(#1);
+    color(40)=(#1);
+    color(75)=(PharoRed);
+    color(100)=(PharoRed)}
+
   % beacon fire
   \shade[bottom color=BeaconRed, top color=BeaconOrange] svg {
     m 68.58,118.36 0,-14.22 22.72,0 0,15.14 -11.16,2.74 -11.56,-3.66

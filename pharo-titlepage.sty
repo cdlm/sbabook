@@ -15,6 +15,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
+\usetikzlibrary{shadings}
 \usetikzlibrary{svg.path}
 
 % fixup TikZ page coordinates for memoir stock & trimming
@@ -133,44 +134,49 @@
     \coordinate (stocktopleft) at ([left=\trimedge,above=\trimtop]current page.north west);
     \coordinate (stockbottomright) at ([right=\stockwidth,below=\stockheight]stocktopleft);
 
-    \coordinate (horizon) at ($ (top)!.618!(center) $);
+    \coordinate (horizon) at ($ (center)!.618!(top) $);
     \coordinate (depths) at ($ (center)!.618!(bottom) $);
 
     \newcommand\beaconscaling{(.618\paperheight/120pt)} % golden ratio factor & approx. height of beacon tower
-    \coordinate (beacon) at ($ (depths -| left) + (-10.1,-2.5) $);
+    \coordinate (beacon) at ($ (depths -| left) + (-9.75,-2.5) $);
 
-    \node[anchor=north east] at ($ (horizon -| right) + (-.1\pagewidth,-2cm) $) {
-        \begin{varwidth}{.8\pagewidth}
-          \flushright \fontsize{50pt}{60pt}\sffamily\bfseries\color{white}
+    \node[anchor=north east] at ($ (horizon -| right) + (-.1\pagewidth,0cm) $) {
+        \begin{varwidth}{.6\pagewidth}
+          \flushright \fontsize{50pt}{60pt}\sffamily\color{PharoDarkBlue}
           \@title
         \end{varwidth}
       };
 
     \node[anchor=south east] at ($ (depths -| right) + (-.1\pagewidth,1cm) $) {
         \begin{varwidth}{.8\pagewidth}
-          \flushright \HUGE\sffamily\color{white}
+          \flushright \HUGE\sffamily\color{PharoDarkBlue!75!PharoBlue!50!Shade}
           \@author
         \end{varwidth}
       };
 
       \node[anchor=north east] at ($ (depths -| right) + (-.1\pagewidth,-.5cm) $) {
         \begin{varwidth}{.8\pagewidth}
-          \flushright \huge\sffamily\color{PharoDarkBlue!50!PharoBlue!50!LightShade}
+          \flushright \huge\sffamily\color{PharoDarkBlue!75!PharoBlue!50!Shade}
           \ifx\@empty\@series\else\@series\titlebreak\fi
           \@date
         \end{varwidth}
       };
 
     \begin{pgfonlayer}{background}
-      \shade[bottom color=LightShade, top color=Shade] (stocktopleft) rectangle (depths -| stockbottomright);
-      % \fill[mid] (horizon -| stocktopleft) rectangle (depths -| stockbottomright);
-      \shade[bottom color=bot, top color=LightShade] (depths -| stocktopleft) rectangle (stockbottomright);
+      \shade[
+        upper left = Shade, upper right = Shade!25!PharoBlue,
+        lower left = LightShade!75!PharoBlue, lower right = LightShade
+      ] (stocktopleft) rectangle (depths -| stockbottomright);
+      \shade[
+        upper left = LightShade!75!PharoBlue, upper right = LightShade,
+        lower left = PharoDarkBlue!75!Shade, lower right = PharoBlue
+      ] (depths -| stocktopleft) rectangle (stockbottomright);
 
       \begin{scope}[
         transform canvas={shift=(beacon)},
         scale=\beaconscaling]
 
-        \pharobeacon@tikz[bot]
+        \pharobeacon@tikz[PharoBlue!75!PharoDarkBlue!75!Shade]
 
       \end{scope}
     \end{pgfonlayer}

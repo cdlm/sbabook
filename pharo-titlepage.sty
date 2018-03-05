@@ -141,22 +141,22 @@
     \coordinate (beacon) at ($ (depths -| left) + (-9.75,-2.5) $);
 
     \node[anchor=north east] at ($ (horizon -| right) + (-.1\pagewidth,0cm) $) {
-        \begin{varwidth}{.6\pagewidth}
-          \flushright \fontsize{50pt}{60pt}\sffamily\color{PharoDarkBlue}
+        \begin{varwidth}{.6\pagewidth}%
+          \flushright \fontsize{50pt}{60pt}\sffamily
           \@title
         \end{varwidth}
       };
 
     \node[anchor=south east] at ($ (depths -| right) + (-.1\pagewidth,1cm) $) {
-        \begin{varwidth}{.8\pagewidth}
-          \flushright \HUGE\sffamily\color{PharoDarkBlue!75!PharoBlue!50!Shade}
+        \begin{varwidth}{.8\pagewidth}%
+          \flushright \HUGE\sffamily
           \@author
         \end{varwidth}
       };
 
       \node[anchor=north east] at ($ (depths -| right) + (-.1\pagewidth,-.5cm) $) {
-        \begin{varwidth}{.8\pagewidth}
-          \flushright \huge\sffamily\color{PharoDarkBlue!75!PharoBlue!50!Shade}
+        \begin{varwidth}{.8\pagewidth}%
+          \flushright \huge\sffamily\color{PharoDarkBlue}%
           \ifx\@empty\@series\else\@series\titlebreak\fi
           \@date
         \end{varwidth}

@@ -395,7 +395,6 @@
 
 %% Combine figures, tables, listings into a single list. We redirect everything
 %% to the list of figures
-\renewcommand\listfigurename{Illustrations}
 \renewcommand\ext@table{lof}
 
 %% Avoid ugly page breaks in contents / list of illustrations
@@ -467,3 +466,6 @@
 %%% Language, localizations, hyphenation
 %%%
 \RequirePackage{polyglossia}
+\setmainlanguage{english}
+\addto\captionsenglish{%
+  \renewcommand*\listfigurename{Illustrations}}

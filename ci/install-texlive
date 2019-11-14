@@ -46,7 +46,7 @@ function texlive-release() {
 
 function get-texlive-installer() {
     # download, checksum, extract
-    curl --location --remote-name-all "${TEXLIVE_REPOSITORY}/${TEXLIVE_TARBALL}"{,.sha512}
+    curl --silent --location --remote-name-all "${TEXLIVE_REPOSITORY}/${TEXLIVE_TARBALL}"{,.sha512}
     shasum --check "${TEXLIVE_TARBALL}.sha512"
     tar --extract --gzip --file "${TEXLIVE_TARBALL}"
 }
@@ -82,7 +82,7 @@ EOF
 
 function install-texlive() {
     [[ $TRAVIS = true ]] || die "Should only run on Travis"
-    echo "Installing TeXlive..."
+    echo "Downloading minimal TeXlive..."
     echo "  release $TEXLIVE_RELEASE"
     echo "  from $TEXLIVE_REPOSITORY"
 

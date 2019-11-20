@@ -42,16 +42,11 @@
 %%%
 %%% Fonts & paragraph typography
 %%%
-\RequirePackage{fontspec}
+\RequirePackage{fontspec,gentium,opensans,FiraMono}
 
-\setmainfont[
-  Ligatures=TeX, % supposed to replace Mapping=tex-text
-  UprightFont = {Gentium Book Basic},
-  ItalicFont = {Gentium Book Basic Italic}
-]{Gentium Basic}
+\setmainfont{Gentium Book Basic}
 \setsansfont[
   Scale=MatchLowercase,
-  Ligatures=TeX,
   Numbers=OldStyle
 ]{Open Sans}
 \setmonofont[
@@ -60,6 +55,10 @@
   % caveat: LuaLaTeX doesn't support changing the actual character
   % alternative solution: \usepackage[htt]{hyphenat}
 ]{Fira Mono}%{Hack}
+
+\@ifpackagelater{opensans}{2019/06/19}
+  {}% we're all good
+  {\defaultfontfeatures[Open Sans]{BoldFont = {* Bold}}}% workaround naming bug
 
 \let\codefamily\ttfamily
 \newcommand\textcode[1]{\texttt{#1}}

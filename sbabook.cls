@@ -45,16 +45,16 @@
 \RequirePackage{fontspec,gentium,opensans,FiraMono}
 
 \setmainfont{Gentium Book Basic}
-\setsansfont[
+\setsansfont{Open Sans}[
   Scale=MatchLowercase,
   Numbers=OldStyle
-]{Open Sans}
-\setmonofont[
+]
+\setmonofont{Fira Mono}[
   Scale=MatchLowercase,
   HyphenChar={-} % enable hyphenation (disabled by default in mono fonts)
   % caveat: LuaLaTeX doesn't support changing the actual character
   % alternative solution: \usepackage[htt]{hyphenat}
-]{Fira Mono}%{Hack}
+]
 
 \@ifpackagelater{opensans}{2019/06/19}
   {}% we're all good

@@ -46,6 +46,9 @@
 
 \setmainfont{Gentium Book Basic}
 \setsansfont{Open Sans}[
+  \@ifpackagelater{opensans}{2019/06/19}% test for font naming bug
+    {}% 2019/06/20 fixed it
+    {BoldFont = {* Bold},}
   Scale=MatchLowercase,
   Numbers=OldStyle
 ]
@@ -55,10 +58,6 @@
   % caveat: LuaLaTeX doesn't support changing the actual character
   % alternative solution: \usepackage[htt]{hyphenat}
 ]
-
-\@ifpackagelater{opensans}{2019/06/19}
-  {}% we're all good
-  {\defaultfontfeatures[Open Sans]{BoldFont = {* Bold}}}% workaround naming bug
 
 \let\codefamily\ttfamily
 \newcommand\textcode[1]{\texttt{#1}}

@@ -12,6 +12,9 @@ install:
 script:
   - latexmk
 
+after_failure:
+  - cat sbabook.log
+
 deploy:
   - provider: releases
     edge: true

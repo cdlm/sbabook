@@ -489,7 +489,6 @@
 %% verbatim setup
 \bvtopandtail % \bvsides
 \setlength{\bvboxsep}{.25em}
-\tabson[4]
 \setverbatimfont{\normalfont\codefamily\small}
 
 \DeclareRobustCommand{\LaTeX}{%

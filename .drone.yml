@@ -7,4 +7,34 @@ steps:
   - name: build
     image: texlive/texlive
     commands:
-      - latexmk
+      - latexmk sbabook
+      - latexmk sbabook.bod
+      - latexmk sbabook.spiral
+
+  - name: error log
+    image: alpine
+    commands:
+      - cat *.log
+    when:
+      status: [failure]
+
+---
+kind: pipeline
+type: docker
+name: minimal
+
+steps:
+  - name: build
+    image: texlive/texlive:latest-minimal
+    commands:
+      - tlmgr install latex-bin latexmk
+      - xargs tlmgr install < texlive-2024.deps
+      - tlmgr path add
+      - latexmk sbabook
+
+  - name: error log
+    image: alpine
+    commands:
+      - cat *.log
+    when:
+      status: [failure]

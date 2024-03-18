@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -o nounset
+set -o errexit
+set -o errtrace
+set -o pipefail
+IFS=$'\n\t'
+trap 'echo "Error on line $LINENO. Exit code: $?" >&2' ERR
+
+PREFIX="$(kpsewhich --var-value TEXMFROOT)"
+
+function die {
+    local code="${1:-1}"
+    [[ $# -ge 1 ]] && shift
+
+    printf "%s\n" "$(tput setaf 1)$*$(tput sgr0)" 1>&2
+    exit "$code"
+}
+
+function info {
+    printf "$(tput setaf 3)%s$(tput sgr0)\n" "$@" 1>&2
+}
+
+function filter-inputs {
+    sed -e '\#^INPUT '"$PREFIX"'/texmf-dist#!d' \
+        -e 's#^INPUT '"$PREFIX"'/##' \
+        "$@"
+}
+
+function package-name {
+    local filename="${1?}"
+    tlmgr search --global --file "$filename" \
+        | sed \
+            -e '/^\t/d' -e '/^tlmgr:/d' \
+            -e "s/^\(.*\):$/\1/"
+}
+
+function find-packages {
+    while read -r filename; do
+        info "$filename"
+        package-name "$filename"
+    done
+}
+
+function list-deps {
+    local main="${1:-main}"
+    main="${main%.(tex|aux|fls)}"
+    [[ -f "$main.fls" ]] || die 1 "no such file: $main.fls"
+
+    filter-inputs "$main.fls" | sort --unique > "$main.inputs"
+    info "$(wc -l "$main.inputs")"
+
+    find-packages < "$main.inputs" | tee "$main.deps"
+    sort --unique --output "$main.deps" "$main.deps"
+}
+
+list-deps "$@"

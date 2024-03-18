@@ -1,7 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{sbabook}[2020/02/28]
+\ProvidesClass{sbabook}[2024/03/18]
 
-% \ExecuteOptions{a4paper,11pt,twoside}
 \ProcessOptions*
 \LoadClassWithOptions{memoir}
 

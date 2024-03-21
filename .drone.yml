@@ -7,6 +7,8 @@ steps:
   - name: build
     image: texlive/texlive
     commands:
+      - tlmgr option repository https://ctan.gutenberg-asso.fr/systems/texlive/tlnet
+      - tlmgr update --self --all
       - latexmk sbabook
       - latexmk sbabook.bod
       - latexmk sbabook.spiral
@@ -26,6 +28,7 @@ name: minimal
 steps:
   - name: build
     image: texlive/texlive:latest-minimal
+    pull: always
     commands:
       - tlmgr option repository https://ctan.gutenberg-asso.fr/systems/texlive/tlnet
       - tlmgr update --self --all
@@ -33,6 +36,8 @@ steps:
       - xargs tlmgr install < texlive-2024.deps
       - tlmgr path add
       - latexmk sbabook
+      - latexmk sbabook.bod
+      - latexmk sbabook.spiral
 
   - name: build log
     image: alpine

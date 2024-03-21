@@ -58,6 +58,7 @@ steps:
   - name: build
     image: ubuntu
     commands:
+      - apt-get update && apt-get install -y curl perl
       - ./ci/install-texlive
       - latexmk sbabook
       - latexmk sbabook.bod

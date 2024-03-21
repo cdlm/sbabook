@@ -47,7 +47,7 @@ function texlive-release() {
 function get-texlive-installer() {
     # download, checksum, extract
     curl --silent --location --remote-name-all "${TEXLIVE_REPOSITORY}/${TEXLIVE_TARBALL}"{,.sha512}
-    shasum --check "${TEXLIVE_TARBALL}.sha512"
+    sha512sum --check "${TEXLIVE_TARBALL}.sha512"
     tar --extract --gzip --file "${TEXLIVE_TARBALL}"
 }
 

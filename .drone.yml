@@ -27,6 +27,8 @@ steps:
   - name: build
     image: texlive/texlive:latest-minimal
     commands:
+      - tlmgr option repository https://ctan.gutenberg-asso.fr/systems/texlive/tlnet
+      - tlmgr update --self --all
       - tlmgr install latex-bin latexmk
       - xargs tlmgr install < texlive-2024.deps
       - tlmgr path add

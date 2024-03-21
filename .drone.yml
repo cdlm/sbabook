@@ -11,12 +11,12 @@ steps:
       - latexmk sbabook.bod
       - latexmk sbabook.spiral
 
-  - name: error log
+  - name: build log
     image: alpine
     commands:
       - cat *.log
     when:
-      status: [failure]
+      status: [failure, success]
 
 ---
 kind: pipeline
@@ -32,9 +32,9 @@ steps:
       - tlmgr path add
       - latexmk sbabook
 
-  - name: error log
+  - name: build log
     image: alpine
     commands:
       - cat *.log
     when:
-      status: [failure]
+      status: [failure, success]

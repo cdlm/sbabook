@@ -4,7 +4,7 @@ set -o errexit
 set -o errtrace
 set -o pipefail
 IFS=$'\n\t'
-trap 'echo "Error on line $LINENO. Exit code: $?" >&2' ERR
+trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
 PREFIX="$(kpsewhich --var-value TEXMFROOT)"
 
@@ -53,4 +53,8 @@ function list-deps {
     sort --unique --output "$main.deps" "$main.deps"
 }
 
-list-deps "$@"
+# Only call the main function if this script was called as a command. This makes
+# it possible to source this script as a library.
+if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
+    list-deps "$@"
+fi

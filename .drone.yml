@@ -52,7 +52,7 @@ type: docker
 name: ubuntu
 
 environment:
-  TEXLIVE_RELEASE: 2024
+  TEXLIVE_RELEASE: 2023
 
 steps:
   - name: build

@@ -23,7 +23,7 @@ steps:
 ---
 kind: pipeline
 type: docker
-name: minimal
+name: texlive-minimal
 
 steps:
   - name: build
@@ -35,6 +35,30 @@ steps:
       - tlmgr install latex-bin latexmk
       - xargs tlmgr install < texlive-2024.deps
       - tlmgr path add
+      - latexmk sbabook
+      - latexmk sbabook.bod
+      - latexmk sbabook.spiral
+
+  - name: build log
+    image: alpine
+    commands:
+      - cat *.log
+    when:
+      status: [failure, success]
+
+---
+kind: pipeline
+type: docker
+name: ubuntu
+
+environment:
+  TEXLIVE_RELEASE: 2024
+
+steps:
+  - name: build
+    image: ubuntu
+    commands:
+      - ./ci/install-texlive
       - latexmk sbabook
       - latexmk sbabook.bod
       - latexmk sbabook.spiral

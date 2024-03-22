@@ -76,7 +76,9 @@ tlpdbopt_generate_updmap 0
 tlpdbopt_install_docfiles 0
 tlpdbopt_install_srcfiles 0
 tlpdbopt_post_code 1
-
+tlpdbopt_sys_bin /usr/local/bin
+tlpdbopt_sys_info /usr/local/info
+tlpdbopt_sys_man /usr/local/man
 EOF
 }
 
@@ -97,6 +99,7 @@ function install-texlive() {
 }
 
 function install-deps() {
+    tlmgr update --self --all
     tlmgr install latex-bin latexmk
     xargs tlmgr install < "$(deps-file "$TEXLIVE_RELEASE")"
 }

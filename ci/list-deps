@@ -6,6 +6,8 @@ set -o pipefail
 IFS=$'\n\t'
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
+shopt -s extglob
+
 PREFIX="$(kpsewhich --var-value TEXMFROOT)"
 
 function die {
@@ -43,7 +45,7 @@ function find-packages {
 
 function list-deps {
     local main="${1:-main}"
-    main="${main%.(tex|aux|fls)}"
+    main="${main%.@(tex|aux|fls)}" # extglob
     [[ -f "$main.fls" ]] || die 1 "no such file: $main.fls"
 
     filter-inputs "$main.fls" | sort --unique > "$main.inputs"

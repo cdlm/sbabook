@@ -3,10 +3,11 @@ set -o nounset
 set -o errexit
 set -o errtrace
 set -o pipefail
-IFS=$'\n\t'
+IFS=
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
 shopt -s extglob
+declare -A DEPS
 
 PREFIX="$(kpsewhich --var-value TEXMFROOT)"
 
@@ -14,12 +15,17 @@ function die {
     local code="${1:-1}"
     [[ $# -ge 1 ]] && shift
 
-    printf "%s\n" "$(tput setaf 1)$*$(tput sgr0)" 1>&2
+    printf "$(tput setaf 1)%s$(tput sgr0)\n" "$@" 1>&2
     exit "$code"
 }
 
+function info-inline {
+    printf "$(tput setaf 3)%s$(tput sgr0)" "$@" 1>&2
+}
+
 function info {
-    printf "$(tput setaf 3)%s$(tput sgr0)\n" "$@" 1>&2
+    info-inline "$@"
+    printf "\n" 1>&2
 }
 
 function filter-inputs {
@@ -28,17 +34,40 @@ function filter-inputs {
         "$@"
 }
 
-function package-name {
+function query-package-containing {
     local filename="${1?}"
     tlmgr search --global --file "$filename" \
-        | sed \
-            -e '/^\t/d' -e '/^tlmgr:/d' \
-            -e "s/^\(.*\):$/\1/"
+        | sed '/^\t/d ; /^tlmgr:/d ; s/:$//'
+}
+
+function list-package-files {
+    local pkgname="${1?}"
+    tlmgr info --list "$pkgname" \
+        | sed '/^  /!d ; s/^ *//'
+}
+
+function encache-file {
+    local filename="${1?}" pkgname
+    pkgname="$(query-package-containing "${filename}")"
+    while read -r provided; do
+        DEPS["$provided"]="$pkgname"
+    done < <(list-package-files "$pkgname")
+}
+
+function package-name {
+    local filename="${1?}"
+    info-inline "$filename"
+    if [[ -z "${DEPS["$filename"]+found}" ]]; then
+        info " (querying…)"
+        encache-file "$filename"
+        echo "${DEPS["$filename"]}"
+    else
+        info " (from ${DEPS[$filename]})"
+    fi
 }
 
 function find-packages {
     while read -r filename; do
-        info "$filename"
         package-name "$filename"
     done
 }

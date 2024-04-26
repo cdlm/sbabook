@@ -9,6 +9,8 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 shopt -s extglob
 declare -A DEPS
 
+: "${TEXLIVE_REPOSITORY:=http://mirror.ctan.org/systems/texlive/tlnet}"
+TEXLIVE_REPOSITORY="$(curl -LIs -o /dev/null -w '%{url_effective}' "$TEXLIVE_REPOSITORY")"
 PREFIX="$(kpsewhich --var-value TEXMFROOT)"
 
 function die {
@@ -36,13 +38,15 @@ function filter-inputs {
 
 function query-package-containing {
     local filename="${1?}"
-    tlmgr search --global --file "$filename" \
+    tlmgr --repository "$TEXLIVE_REPOSITORY" \
+        search --global --file "$filename" \
         | sed '/^\t/d ; /^tlmgr:/d ; s/:$//'
 }
 
 function list-package-files {
     local pkgname="${1?}"
-    tlmgr info --list "$pkgname" \
+    tlmgr --repository "$TEXLIVE_REPOSITORY" \
+        info --list "$pkgname" \
         | sed '/^  /!d ; s/^ *//'
 }
 
@@ -58,9 +62,9 @@ function package-name {
     local filename="${1?}"
     info-inline "$filename"
     if [[ -z "${DEPS["$filename"]+found}" ]]; then
-        info " (querying…)"
+        info " (querying ${TEXLIVE_REPOSITORY})"
         encache-file "$filename"
-        echo "${DEPS["$filename"]}"
+        echo "${DEPS["$filename"]}" || info "failed to resolve ${filename}"
     else
         info " (from ${DEPS[$filename]})"
     fi

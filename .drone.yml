@@ -63,9 +63,9 @@ steps:
     image: ubuntu
     commands:
       - apt update && apt install -y curl perl
-      - echo $PATH
       - export PATH=$HOME/texlive/bin/x86_64-linux:$HOME/texlive/bin/aarch64-linux:$PATH
       - ./ci/install-texlive
+      - xargs tlmgr install < texlive-2023.deps
       - latexmk sbabook
       - latexmk sbabook.bod
       - latexmk sbabook.spiral
@@ -92,9 +92,9 @@ steps:
     image: ubuntu
     commands:
       - apt update && apt install -y curl perl
-      - echo $PATH
       - export PATH=$HOME/texlive/bin/x86_64-linux:$HOME/texlive/bin/aarch64-linux:$PATH
       - ./ci/install-texlive
+      - xargs tlmgr install < texlive.deps
       - latexmk sbabook
       - latexmk sbabook.bod
       - latexmk sbabook.spiral

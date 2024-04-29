@@ -30,6 +30,11 @@ function info {
     printf "\n" 1>&2
 }
 
+function texlive-release() {
+    tlmgr --version \
+        | sed '/^tlmgr/d ; s/.*version //'
+}
+
 function filter-inputs {
     sed -e '\#^INPUT '"$PREFIX"'/texmf-dist#!d' \
         -e 's#^INPUT '"$PREFIX"'/##' \

@@ -19,6 +19,7 @@
     \advance\stockheight 2\trimtop
     \advance\stockwidth  2\trimedge}
 
+% Paper format for US trade paperback (e.g. Lulu)
 \newcommand{\paperbackpage}{
   \stockustrade
   \setbleed{.125in}
@@ -26,12 +27,14 @@
   \setlrmarginsandblock{.85in}{.65in}{*}
   \setulmarginsandblock{.75in}{.75in}{*}}
 
+% Paper format for office binding (both A4 and letter paper)
 \newcommand{\spiralboundpage}{
   \stockaivus
   \setbleed{0pt}% trims not required (unless we deliver this via Lulu as well?)
   \setlrmarginsandblock{1.25in}{1.25in}{*}
   \setulmarginsandblock{.75in}{1in}{*}}
 
+% Paper format for https://librairie.bod.fr
 \newcommand{\bodpage}{
   \setstocksize{220mm}{155mm} % final trimmed book dimensions
   \setbleed{5mm} % additional paper, before trimming
